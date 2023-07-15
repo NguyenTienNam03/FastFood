@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AppData.Models.Drinks>
+
+@{
+    ViewData["Title"] = "ShowAllDrink";
+    Layout = @"~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<div id="about" class="about" style="margin-top: 100px;">
+    <h1 class="section-header">ShowAllDrink</h1>
+
+    <p>
+        <a href="~/Admin/Manage/AddDrink">Create New</a>
+    </p>
+    <table class="table" style="color:white">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDDrink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameDrink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDDrink)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameDrink)
+                    </td>
+                    <td>
+                        <img src="~/img/Combo/@item.Image" style="height:150px; width:150px;">
+                    </td>
+                    <td>
+                        $ @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mass) ML
+                    </td>
+                    <td>
+                        @if(item.Status == 1)
+                        {
+                            <p>Còn hàng</p>
+                        } else
+                        {
+                            <p>Hết hàng</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "UpdateDrink", new { id = item.IDDrink }) |
+                        @Html.ActionLink("Details", "DetailDrink", new {  id = item.IDDrink  }) |
+                        @Html.ActionLink("Delete", "DeleteDrink", new { IDDrink = item.IDDrink })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

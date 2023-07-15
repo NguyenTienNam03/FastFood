@@ -1,0 +1,58 @@
+﻿@model AppData.Models.Drinks
+
+@{
+    ViewData["Title"] = "DetailDrink";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin-top:50px;">
+    <h1>DetailDrink</h1>
+
+    <div>
+        <h4>Drinks</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2" style="display:none;">
+                @Html.DisplayNameFor(model => model.IDDrink)
+            </dt>
+            <dd class="col-sm-10" style="display:none;">
+                @Html.DisplayFor(model => model.IDDrink)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NameDrink)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NameDrink)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="~/img/Combo/@Model.Image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" width="150px" height="150px">
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Mass)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Mass)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "UpdateDrink", new {  id = Model.IDDrink }) |
+        <a href="~/Admin/Manage/ShowAllDrink">Back to List</a>
+    </div>
+</div>
+

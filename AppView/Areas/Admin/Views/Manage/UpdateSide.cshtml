@@ -1,0 +1,77 @@
+﻿@model AppData.Models.SideDishes
+
+@{
+    ViewData["Title"] = "UpdateSide";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>UpdateSide</h1>
+
+    <h4>SideDishes</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="~/Admim/Manage/UpdateSide" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="display:none;">
+                    <label for="IDSideDishes">IDSideDishes</label>
+                    @Html.TextBoxFor(m => m.IDSideDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.IDSideDishes, "", new { @class = "text-danger" })
+            
+                </div>
+                <div class="form-group">
+                    <label for="NameSideDishes">NameSideDishes</label>
+                    @Html.TextBoxFor(m => m.NameSideDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.NameSideDishes, "", new { @class = "text-danger" })
+                   
+                </div>
+                <div class="form-group">
+                    <label for="Image">Image</label>
+                    @Html.TextBoxFor(model => model.Image, null, new { type = "file", @class = "form-control" } )
+                    <br />
+                    @*<img src="~/images/@Model.Image" asp-append-version="true" width="200px" height="200px">
+                    @Html.Hidden("oldimage", @Model.Image)*@
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                 
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Price, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="Mass">Mass</label>
+                    @Html.TextBoxFor(m => m.Mass, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Mass, "", new { @class = "text-danger" })
+        
+                </div>
+                <div class="form-group">
+                    <label for="DescriptionSideDishes">DescriptionSideDishes</label>
+                    @Html.TextBoxFor(m => m.DescriptionSideDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.DescriptionSideDishes, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="Status">Status</label>
+                    @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Status, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a href="~/Admin/Manage/GetAllSideDishes">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model AppData.ViewModels.ComboFastFoodViewModel
+
+@{
+    ViewData["Title"] = "GetComboByID";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetComboByID</h1>
+
+<div>
+    <h4>ComboFastFoodViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDCombo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDCombo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SideDishes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SideDishes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MainDishes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MainDishes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Drink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Drink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NameCombo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NameCombo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceCombo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PriceCombo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DescriptionCombo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescriptionCombo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

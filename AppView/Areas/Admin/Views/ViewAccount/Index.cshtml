@@ -1,0 +1,163 @@
+﻿@{
+    var lstCombo = ViewBag.Combo;
+    var lstDrink = ViewBag.Dink;
+    var lstSide = ViewBag.Side;
+    var lstMain = ViewBag.Main;
+    Layout = @"~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>Our Menu</h2>
+            <p>Check Our <span>FastFood Menu</span></p>
+        </div>
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+
+            <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+                    <h4>Combo</h4>
+                </a>
+            </li><!-- End tab nav item -->
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+                    <h4>MainDishes</h4>
+                </a><!-- End tab nav item -->
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
+                    <h4>SideDishes</h4>
+                </a>
+            </li><!-- End tab nav item -->
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+                    <h4>Drink</h4>
+                </a>
+            </li><!-- End tab nav item -->
+
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+
+            <div class="tab-pane fade active show" id="menu-starters">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>Combo</h3>
+                </div>
+
+                <div class="row gy-5">
+
+                    @foreach (var item in lstCombo)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; display:block;width:348px; border-radius:50%;"></a>
+                            <a href="@Url.Action("GetComboByID","Manage", new { id = item.IDCombo})">@item.NameCombo</a>
+                            @*@Html.ActionLink(item.NameCombo, "ProductDetail", new { id = item.IDCombo})*@
+                            <p class="ingredients">
+                                @item.DescriptionCombo
+                            </p>
+                            <p class="price">
+                                $ @item.PriceCombo
+
+                            </p>
+                            <a href="@Url.Action("ThemVaoGioHang",null)" class="btn btn-outline-primary btn-sm mt-2">Order</a>
+
+                        </div>
+                        <!-- Menu Item -->
+                    }
+
+
+                </div>
+            </div><!-- End Starter Menu Content -->
+
+            <div class="tab-pane fade" id="menu-breakfast">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>MainDishes</h3>
+                </div>
+
+                <div class="row gy-5">
+
+
+                    @foreach (var item in lstMain)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px;  display:block; width:348px; border-radius:50%;"></a>
+                            <a href="@Url.Action("DetailMain","Manage", new { id= item.IDMainDishes})">@item.NameMainDishes</a>
+                            <p class="ingredients">
+                                @item.DescriptionMainDishes
+                            </p>
+                            <p class="price">
+                                $ @item.Price
+                            </p>
+                        </div>
+
+                        <!-- Menu Item -->
+                    }
+
+                </div>
+            </div><!-- End Breakfast Menu Content -->
+
+            <div class="tab-pane fade" id="menu-lunch">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>SideDishes</h3>
+                </div>
+
+                <div class="row gy-5">
+
+
+                    @foreach (var item in lstSide)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; display:block; width:348px; border-radius:50%;"></a>
+                            <a href="@Url.Action("GetDetail","Manage", new { id= item.IDSideDishes})">@item.NameSideDishes</a>
+                            <p class="ingredients">
+
+                                @item.DescriptionSideDishes
+                            </p>
+                            <p class="price">
+                                $ @item.Price
+                            </p>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="menu-dinner">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>Drink</h3>
+                </div>
+
+                <div class="row gy-5">
+
+
+                    @foreach (var item in lstDrink)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; width:348px; display:block; border-radius:50%;"></a>
+                            <a href="@Url.Action("DetailDrink","Manage", new { id= item.IDDrink})">@item.NameDrink</a>
+                            <p class="ingredients">
+                                @item.Mass ML
+                            </p>
+                            <p class="price">
+                                $ @item.Price
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div><!-- End Dinner Menu Content -->
+
+        </div>
+
+    </div>
+</section>

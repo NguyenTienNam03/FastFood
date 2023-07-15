@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AppView</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppView.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header >
+        <div id="header" class="fixed-top d-flex align-items-cente">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+                <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">FastFood</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                <nav id="navbar" class="navbar order-last order-lg-0">
+                    <ul>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#about">About</a></li>
+                        <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
+                       @* <li><a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="Privacy">Specials</a></li>
+                        <li><a class="nav-link scrollto" asp-area="Admin" asp-controller="ViewAccount" asp-action="Index">Events</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="Privacy">Chefs</a></li>
+                        <li><a class="nav-link scrollto" asp-area="" asp-controller="Home" asp-action="Index">Gallery</a></li>*@
+                        <li class="dropdown">
+                            <a href="#"><span>Đăng nhập</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a asp-area="" asp-controller="Login" asp-action="Login">Login/Register</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Order</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Bill</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Setting</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+            </div>
+        </div>
+        
+    </header>
+        <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>About Us</h2>
+          <p>Learn More <span>About Us</span></p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-7 position-relative about-img" style="background-image: url(../img/about.jpg) ;" data-aos="fade-up" data-aos-delay="150">
+           @* <div class="call-us position-absolute">
+              <h4>Book a Table</h4>
+              <p>+1 5589 55488 55</p>
+            </div>*@
+          </div>
+          <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                    Fast food, còn được gọi là đồ ăn nhanh, đã trở thành một phần không thể thiếu trong văn hoá ẩm thực hiện đại. Với tốc độ sống nhanh, fast food trở thành sự lựa chọn phổ biến cho những người muốn có một bữa ăn nhanh chóng và tiện lợi.
+              </p>
+              <ul>
+                 <li><i class="bi bi-check2-all"></i> Fast food mang đến một loạt các món ăn hấp dẫn.</li>
+                 <li><i class="bi bi-check2-all"></i> Thời gian chuẩn bị nhanh, thường được chế biến trước và có sẵn để phục vụ ngay lập tức.</li>
+                 <li><i class="bi bi-check2-all"></i> Fast food vẫn tiếp tục thay đổi và mang đến những trải nghiệm ẩm thực độc đáo cho mọi người trên toàn thế giới.</li>
+              </ul>
+              <p>
+                  Fast food không chỉ là một lựa chọn ăn nhanh, mà còn là một phần của cuộc sống hiện đại. Chúng ta cần hiểu rõ về tác động của fast food đến sức khỏe và thực hiện việc tiêu thụ một cách có ý thức. Với sự kết hợp hợp lý, chúng ta có thể tận hưởng những món ăn fast food mà vẫn duy trì một lối sống lành mạnh và cân đối.
+              </p>
+
+              <div class="position-relative mt-4">
+                <img src="~/img/about2.jpg" class="img-fluid" alt="">
+                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+  @*  <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - AppView - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>*@
+    <footer @*id="footer" class="footer"*@>
+
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>
+                            A108 Adam Street <br>
+                            New York, NY 535022 - US<br>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4>Reservations</h4>
+                        <p>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>
+                            <strong>Mon-Sat: 11AM</strong> - 23PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Follow Us</h4>
+                    <div class="social-links d-flex">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

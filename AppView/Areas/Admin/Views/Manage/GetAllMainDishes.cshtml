@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AppData.Models.MainDishes>
+
+@{
+    ViewData["Title"] = "GetAllMainDishes";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin-top:100px;">
+    <h1>GetAllMainDishes</h1>
+
+    <p>
+        <a href="~/Admin/Manage/AddMain">Create New</a>
+    </p>
+    <table class="table" style="color: white;">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDMainDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameMainDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescriptionMainDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDMainDishes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameMainDishes)
+                    </td>
+                    <td>
+                        <img src="~/img/Combo/@item.Image" style="height:150px; width:150px;">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionMainDishes)
+                    </td>
+                    <td>
+                        @if (item.Status == 1)
+                        {
+                            <p>Còn hàng</p>
+                        }
+                        else
+                        {
+                            <p>Hết hàng</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "UpdateMain", new { IDMainDishes=item.IDMainDishes}) |
+                        @Html.ActionLink("Details", "DetailMain", new {  id=item.IDMainDishes  }) |
+                        @Html.ActionLink("Delete", "DeleteMain", new { IDMainDishes=item.IDMainDishes })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

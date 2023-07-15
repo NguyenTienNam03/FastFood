@@ -1,0 +1,95 @@
+﻿@model AppData.Models.ComboFastFood
+
+@{
+    ViewData["Title"] = "CreateCombo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>CreateCombo</h1>
+
+    <h4>ComboFastFood</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="~/Admin/Manage/CreateCombo">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row" style="display:none;">
+                    <label asp-for="IDCombo" class="control-label col-3"></label>
+                    <input asp-for="IDCombo" class="form-control col-9" />
+                    <span asp-validation-for="IDCombo" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label for="IDSideDishes" class="control-label col-3">SideDishes</label>
+                    <div class="col-9">
+                        @Html.DropDownList("IDMau", ViewBag.side  as IEnumerable<SelectListItem>, "", null)
+                        @Html.ValidationMessageFor(model => model.IDSideDishes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="IDMainDishes" class="control-label col-3">MainDishes</label>
+                    <div class="col-9">
+                        @Html.DropDownList("IDMau",  ViewBag.main as IEnumerable<SelectListItem>, "", null)
+                        @Html.ValidationMessageFor(model => model.IDMainDishes, "", new { @class = "text-danger" })
+                    </div>
+                    </div>
+                <div class="form-group row">
+                    <label for="IDDrink" class="control-label col-3">Drink</label>
+                    <div class="col-9">
+                        @Html.DropDownList("IDMau", ViewBag.dirnk as IEnumerable<SelectListItem>, "", null)
+                        @Html.ValidationMessageFor(model => model.IDDrink, "", new { @class = "text-danger" })
+                    </div> 
+                </div>
+                <div class="form-group row">
+                    <label for="NameCombo" class="control-label col-3">NameCombo</label>
+                    <input asp-for="NameCombo" class="form-control col-9" />
+                    <span asp-validation-for="NameCombo" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label for="Image" class="control-label col-3">Image</label>
+                    <div class="col-9">
+                        @Html.TextBoxFor(model => model.Image, null, new { type = "file", @class = "form-control" } )
+                        <br />
+                        @*<img src="~/images/@Model.Image" asp-append-version="true" width="200px" height="200px">
+                        @Html.Hidden("oldimage", @Model.Image)*@
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                    
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PriceCombo" class="control-label"></label>
+                    <input asp-for="PriceCombo" class="form-control" />
+                    <span asp-validation-for="PriceCombo" class="text-danger"></span>
+                </div>*@
+                <div class="form-group row">
+                    <label for="DescriptionCombo" class="control-label col-3">DescriptionCombo</label>
+                    <input for="DescriptionCombo" class="form-control col-9" />
+                    <span asp-validation-for="DescriptionCombo" class="text-danger"></span>
+                </div>
+               @* <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input asp-for="Status" class="form-control" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</div>
+

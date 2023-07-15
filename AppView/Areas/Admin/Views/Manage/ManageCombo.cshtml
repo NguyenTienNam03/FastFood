@@ -1,0 +1,93 @@
+﻿@model IEnumerable<AppData.ViewModels.ComboFastFoodViewModel>
+
+@{
+    ViewData["Title"] = "ManageCombo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>ManageCombo</h1>
+
+    <p>
+        <a href="~/Admin/Manage/CreateCombo">Create New</a>
+    </p>
+    <table class="table" style="color: white;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDCombo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SideDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MainDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Drink)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameCombo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PriceCombo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescriptionCombo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDCombo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SideDishes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MainDishes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Drink)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameCombo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceCombo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionCombo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

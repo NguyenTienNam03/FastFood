@@ -1,0 +1,76 @@
+﻿@model AppData.Models.MainDishes
+
+@{
+    ViewData["Title"] = "UpdateMain";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>UpdateMain</h1>
+
+    <h4>MainDishes</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="~/Admim/Manage/UpdateMain" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="IDMainDishes">IDMainDishes</label>
+                    @Html.TextBoxFor(m => m.IDMainDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.IDMainDishes, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="NameMainDishes">NameMainDishes</label>
+                    @Html.TextBoxFor(m => m.NameMainDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.NameMainDishes, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="Image">Image</label>
+                    @Html.TextBoxFor(model => model.Image, null, new { type = "file", @class = "form-control" } )
+                    <br />
+                    @*<img src="~/images/@Model.Image" asp-append-version="true" width="200px" height="200px">
+                    @Html.Hidden("oldimage", @Model.Image)*@
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Price, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="Mass">Mass</label>
+                    @Html.TextBoxFor(m => m.Mass, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Mass, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="DescriptionMainDishes">DescriptionMainDishes</label>
+                    @Html.TextBoxFor(m => m.DescriptionMainDishes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.DescriptionMainDishes, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <label for="IDDrink">Status</label>
+                    @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.Status, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</div>
+

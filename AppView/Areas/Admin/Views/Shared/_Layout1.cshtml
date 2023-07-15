@@ -1,0 +1,74 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AppView</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppView.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div id="header" class="fixed-top d-flex align-items-cente">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+                <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">FastFood</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                <nav id="navbar" class="navbar order-last order-lg-0">
+                    <ul>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#about">About</a></li>
+                        <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
+                        <li class="dropdown">
+                            <a><span>Manage</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                            <ul>
+                                <li class="dropdown">
+                                    <a><span>Manage Food</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                    <ul>
+                                        <li><a href="~/Admin/Manage/ManageCombo">ComBoFastFood</a></li>
+                                        <li><a href="~/Admin/Manage/GetAllMainDishes">MainDishes</a></li>
+                                        <li><a href="~/Admin/Manage/GetAllSideDishes">SideDishes</a></li>
+                                        <li><a href="~/Admin/Manage/ShowAllDrink">Drinks</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="~/Admin/Manage/ManageCombo">Manage Customer</a></li>
+                                <li><a href="~/Admin/Manage/ManageCombo">Manage Voucher</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Admin</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="~/Admin/Manage/ManageCombo">Order</a></li>
+                                <li><a href="~/Admin/Manage/ManageCombo">Bill</a></li>
+                                <li><a href="~/Admin/Manage/ManageCombo">Setting</a></li>
+                                <li><a href="~/Admin/Manage/ManageCombo">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

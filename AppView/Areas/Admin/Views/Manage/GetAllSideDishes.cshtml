@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AppData.Models.SideDishes>
+
+@{
+    ViewData["Title"] = "GetAllSideDishes";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>GetAllSideDishes</h1>
+
+    <p>
+        <a href="~/Admin/Manage/AddSide">Create New</a>
+    </p>
+    <table class="table" style="color:white;">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDSideDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameSideDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescriptionSideDishes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDSideDishes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameSideDishes)
+                    </td>
+                    <td>
+                        <img src="~/img/Combo/@item.Image" style="height:150px; width:150px;">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionSideDishes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "UpdateSide", new { IDSideDishes=item.IDSideDishes }) |
+                        @Html.ActionLink("Details", "GetDetail", new { id=item.IDSideDishes }) |
+                        @Html.ActionLink("Delete", "DeleteSide", new { IDSideDishes=item.IDSideDishes })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
