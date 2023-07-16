@@ -12,6 +12,6 @@ namespace AppData.IService
 		public bool CreateCartDetail(CartDetail cartdetail);
 		public bool UpdateCartDetail(CartDetail cartdetail);
 		public bool DeleteCartDetail(Guid IDcartDetail);
-		public List<CartDetail> GetAllCartDetail(Guid? id);
+		public List<CartDetail> GetAllCartDetail(Guid id);
 	}
 }

@@ -50,12 +50,12 @@
                 </div>
 
                 <div class="row gy-5">
-                    
-                        @foreach (var item in lstCombo)
-                        {
+
+                    @foreach (var item in lstCombo)
+                    {
                         <div class="col-lg-4 menu-item">
                             <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; display:block;width:348px; border-radius:50%;"></a>
-                            <a href="@Url.Action("GetComboByID","Home", new { id = item.IDCombo})" >@item.NameCombo</a>
+                            <a href="@Url.Action("DetailCombo","Home", new { id = item.IDCombo})">@item.NameCombo</a>
                             @*@Html.ActionLink(item.NameCombo, "ProductDetail", new { id = item.IDCombo})*@
                             <p class="ingredients">
                                 @item.DescriptionCombo
@@ -64,11 +64,11 @@
                                 $ @item.PriceCombo
 
                             </p>
-                            <a href="@Url.Action("ThemVaoGioHang",null)" class="btn btn-outline-primary btn-sm mt-2">Order</a>
-                           
+                            <a href="@Url.Action("AddToCart", "Home", new { IDFood = item.IDCombo})" class="btn btn-outline-primary btn-sm mt-2">Order</a>
+
                         </div>
-                            <!-- Menu Item -->
-                        }
+                        <!-- Menu Item -->
+                    }
 
 
                 </div>
@@ -83,9 +83,9 @@
 
                 <div class="row gy-5">
 
-                   
-                        @foreach (var item in lstMain)
-                        {
+
+                    @foreach (var item in lstMain)
+                    {
                         <div class="col-lg-4 menu-item">
                             <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px;  display:block; width:348px; border-radius:50%;"></a>
                             <a href="@Url.Action("DetailMain","Home", new { id= item.IDMainDishes})">@item.NameMainDishes</a>
@@ -93,12 +93,13 @@
                                 @item.DescriptionMainDishes
                             </p>
                             <p class="price">
-                               $ @item.Price
+                                $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart", "Home", new { IDFood = item.IDMainDishes})" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
 
                         <!-- Menu Item -->
-                        }
+                    }
 
                 </div>
             </div><!-- End Breakfast Menu Content -->
@@ -112,22 +113,23 @@
 
                 <div class="row gy-5">
 
-                   
-                        @foreach (var item in lstSide)
-                        {
+
+                    @foreach (var item in lstSide)
+                    {
                         <div class="col-lg-4 menu-item">
                             <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; display:block; width:348px; border-radius:50%;"></a>
-                            <a href="@Url.Action("GetSideDetail","Home", new { id= item.IDSideDishes})" >@item.NameSideDishes</a>
+                            <a href="@Url.Action("GetSideDetail","Home", new { id= item.IDSideDishes})">@item.NameSideDishes</a>
                             <p class="ingredients">
 
                                 @item.DescriptionSideDishes
                             </p>
                             <p class="price">
-                               $ @item.Price
+                                $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart", "Home", new { IDFood = item.IDSideDishes})" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
 
-                        }
+                    }
                 </div>
             </div>
 
@@ -140,20 +142,20 @@
 
                 <div class="row gy-5">
 
-                    
-                        @foreach (var item in lstDrink)
-                        {
+                    @foreach (var item in lstDrink)
+                    {
                         <div class="col-lg-4 menu-item">
                             <a href="~/img/Combo/@item.Image" class="glightbox"><img src="~/img/Combo/@item.Image" class="menu-img img-fluid" alt="" style="height:228px; width:348px; display:block; border-radius:50%;"></a>
-                            <a href="@Url.Action("DetailDrink","Home", new { id= item.IDDrink})" >@item.NameDrink</a>
+                            <a href="@Url.Action("DetailDrink","Home", new { id= item.IDDrink})">@item.NameDrink</a>
                             <p class="ingredients">
                                 @item.Mass ML
                             </p>
                             <p class="price">
                                 $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart", "Home", new { IDFood = item.IDDrink})" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
-                        }
+                    }
                 </div>
             </div><!-- End Dinner Menu Content -->
 

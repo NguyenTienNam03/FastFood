@@ -46,7 +46,7 @@ namespace AppData.Service
 			}
 		}
 
-		public List<CartDetail> GetAllCartDetail(Guid? id)
+		public List<CartDetail> GetAllCartDetail(Guid id)
 		{
 			return _context.cartDetails.Where(c => c.IDCart == id).ToList();
 		}

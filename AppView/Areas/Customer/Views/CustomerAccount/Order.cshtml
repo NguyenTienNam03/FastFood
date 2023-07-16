@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AppData.Models.CartDetail>
+
+@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin-top:100px;">
+
+    <table class="table" style="color:black;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDCartDetail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDCart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDsetkey)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDFood)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quatity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDCartDetail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDCart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDsetkey)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDFood)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quatity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<h1>Order</h1>
+
+

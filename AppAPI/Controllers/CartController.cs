@@ -73,45 +73,51 @@ namespace AppAPI.Controllers
                 {
 					// Tao bang chung
 					Setkey setkey = new Setkey();
-					setkey.IDSetKey = Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7");
-					setkey.IDMain = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).IDMainDishes == idfood ? idfood : null;
-					setkey.IDCombo = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).IDCombo == idfood ? idfood : null;
-					setkey.IDDrink = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).IDDrink == idfood ? idfood : null;
-					setkey.IDSide = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).IDSideDishes == idfood ? idfood : null;
-
-					_setkeyservice.CreateSetKey(setkey);
-
-					// them vao gioi hang chi tiet
+					setkey.IDSetKey = Guid.NewGuid();
+					if(_mainDishesService.GetMainDishes().Any(c => c.IDMainDishes == idfood) == true)
+					{
+                        setkey.IDMain = _mainDishesService.GetMainDishes().First(c => c.IDMainDishes == idfood).IDMainDishes == idfood ? idfood : null;
+                    } else if ( _comboFastFoodService.GetList().Any(c => c.IDCombo == idfood) == true)
+					{
+                        setkey.IDCombo = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).IDCombo == idfood ? idfood : null;
+                    } else if ( _drinkService.GetAllDrinks().Any(c => c.IDDrink == idfood) == true)
+					{
+                        setkey.IDDrink = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).IDDrink == idfood ? idfood : null;
+                    } else
+					{
+                        setkey.IDSide = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).IDSideDishes == idfood ? idfood : null;
+                    }
+                    _setkeyservice.CreateSetKey(setkey);
+                    // them vao gioi hang chi tiet
                     CartDetail cartDetail = new CartDetail();
                     cartDetail.IDCartDetail = Guid.NewGuid();
-					cartDetail.IDsetkey = _setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7")).IDSetKey;
+					cartDetail.IDsetkey = _setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDSetKey;
                     cartDetail.IDCart = _cartService.GetAllCart().FirstOrDefault(c => c.IDCart == idcus).IDCart;
-                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7")).IDCombo != null)
+                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDCombo != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).Price;
                     }
-                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7")).IDDrink != null)
+                    else if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDDrink != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).Price;
                     }
-                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7")).IDMain != null)
+                    else if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDMain != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).Price;
                     }
-                    if(_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7")).IDSide != null)
+					else
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).Price;
                     }
                     cartDetail.Quatity = 1;
-                    _cartDetailService.CreateCartDetail(cartDetail); // them vao 
+                    return _cartDetailService.CreateCartDetail(cartDetail); // them vao 
 
 					// them xong xoa bang trung gian
-					_setkeyservice.DeleteSetKey(Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7"));
-					return true;
+					//return _setkeyservice.DeleteSetKey(Guid.Parse("965a103c-07f0-4004-afd7-7798f7e6aef7"));
                 }
             } else
 			{
@@ -125,7 +131,7 @@ namespace AppAPI.Controllers
 
 		// show all item trong gio hang của khách hàng
 		[HttpGet("[action]")]
-		public List<CartDetail> ShowCartDetail(Guid? id) // Truyen id cart hoac id customer
+		public List<CartDetail> ShowCartDetail(Guid id) // Truyen id cart hoac id customer
 		{
 			return _cartDetailService.GetAllCartDetail(id);
 		}

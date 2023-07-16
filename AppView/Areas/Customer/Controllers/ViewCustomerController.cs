@@ -1,14 +1,23 @@
-﻿using AppData.Models;
+﻿using AppData.IService;
+using AppData.Models;
+using AppData.Service;
 using AppData.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
+using System.Text;
 
 namespace AppView.Areas.Customer.Controllers
 {
     public class ViewCustomerController : Controller
     {
         HttpClient client = new HttpClient();
-        public async Task< IActionResult> Index()
+        private ICustomerService customerService;
+        public ViewCustomerController()
+        {
+            customerService = new CustomerSevice();
+        }
+        public async Task<IActionResult> Index()
         {
             string UrlCombo = "https://localhost:7031/api/ComboFastFood/ShowComboFF";
             string UrlDrink = "https://localhost:7031/api/ComboFastFood/GetAllDrink";
@@ -50,6 +59,24 @@ namespace AppView.Areas.Customer.Controllers
             }
 
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(CartDetail cartDetail)
+        {
+            ClaimsPrincipal claimsPrincipal = HttpContext.User;
+            var user = HttpContext.User;
+            var email = user.FindFirstValue(ClaimTypes.Email);
+            //if (customerService.GetAllCus().Any(c => c.Email == email))
+            //{
+                var idcustomer = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
+                string url = $"https://localhost:7031/api/Cart/AddToCart?idfood={cartDetail.IDFood}&idcus={idcustomer}";
+                var obj = JsonConvert.SerializeObject(cartDetail);
+                StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+                HttpResponseMessage message = await client.PostAsync(url, content);
+
+                return RedirectToAction("Oder", "CustomerAccountController");
+            //}
+            //return RedirectToAction("Oder", "CustomerAccountController");
         }
 
         public async Task<IActionResult> AddToCart()

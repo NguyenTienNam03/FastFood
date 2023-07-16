@@ -1,4 +1,6 @@
-﻿using AppData.Models;
+﻿using AppData.IService;
+using AppData.Models;
+using AppData.Service;
 using AppData.ViewModels;
 using AppView.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,41 +9,45 @@ using Newtonsoft.Json;
 using QRCoder;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Claims;
+using System.Text;
 using ZXing.QrCode.Internal;
 
 namespace AppView.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
         HttpClient client = new HttpClient();
+        private ICustomerService customerService;
         public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+        {
+            _logger = logger;
+            customerService = new CustomerSevice();
+        }
 
-		public async Task<IActionResult> Index()
-		{
-			string UrlCombo = "https://localhost:7031/api/ComboFastFood/ShowComboFF";
-			string UrlDrink = "https://localhost:7031/api/ComboFastFood/GetAllDrink";
-			string UrlSide = "https://localhost:7031/api/ComboFastFood/GetAllSidedishes";
-			string UrlMain = "https://localhost:7031/api/ComboFastFood/GetAllMainDihes";
+        public async Task<IActionResult> Index()
+        {
+            string UrlCombo = "https://localhost:7031/api/ComboFastFood/ShowComboFF";
+            string UrlDrink = "https://localhost:7031/api/ComboFastFood/GetAllDrink";
+            string UrlSide = "https://localhost:7031/api/ComboFastFood/GetAllSidedishes";
+            string UrlMain = "https://localhost:7031/api/ComboFastFood/GetAllMainDihes";
 
-			
 
-            Task<HttpResponseMessage> reposcombo =  client.GetAsync(UrlCombo);
-            Task<HttpResponseMessage> reposdrink =  client.GetAsync(UrlDrink);
-            Task<HttpResponseMessage> reposside =  client.GetAsync(UrlSide);
-            Task<HttpResponseMessage> reposmain =  client.GetAsync(UrlMain);
 
-			Task.WhenAll(reposcombo, reposdrink, reposside, reposmain);
+            Task<HttpResponseMessage> reposcombo = client.GetAsync(UrlCombo);
+            Task<HttpResponseMessage> reposdrink = client.GetAsync(UrlDrink);
+            Task<HttpResponseMessage> reposside = client.GetAsync(UrlSide);
+            Task<HttpResponseMessage> reposmain = client.GetAsync(UrlMain);
 
-			if(reposcombo.Result.IsSuccessStatusCode)
-			{
-				var result1 = reposcombo.Result.Content.ReadAsStringAsync();
-				var datacombo =  JsonConvert.DeserializeObject<List<ComboFastFoodViewModel>>(await result1);
-				ViewBag.Combo = datacombo;
-			}
+            Task.WhenAll(reposcombo, reposdrink, reposside, reposmain);
+
+            if (reposcombo.Result.IsSuccessStatusCode)
+            {
+                var result1 = reposcombo.Result.Content.ReadAsStringAsync();
+                var datacombo = JsonConvert.DeserializeObject<List<ComboFastFoodViewModel>>(await result1);
+                ViewBag.Combo = datacombo;
+            }
             if (reposdrink.Result.IsSuccessStatusCode)
             {
                 var result2 = reposdrink.Result.Content.ReadAsStringAsync();
@@ -62,11 +68,15 @@ namespace AppView.Controllers
             }
 
             return View();
-		}
-		[HttpGet]
-        public async Task<IActionResult> GetComboByID(Guid id)
+        }
+        [HttpGet]
+        public async Task<IActionResult> DetailCombo(Guid id)
         {
-            return View();
+            string url = $"https://localhost:7031/api/ComboFastFood/ShowComboFFByID?id={id}";
+            var respon = await client.GetAsync(url);
+            var data = await respon.Content.ReadAsStringAsync();
+            ComboFastFoodViewModel Combo = JsonConvert.DeserializeObject<ComboFastFoodViewModel>(data);
+            return View(Combo);
         }
         [HttpGet]
         public async Task<IActionResult> DetailDrink(Guid id)
@@ -96,11 +106,28 @@ namespace AppView.Controllers
             var sides = JsonConvert.DeserializeObject<SideDishes>(data);
             return View(sides);
         }
+        [HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(CartDetail cartDetail)
+        {
+
+            ClaimsPrincipal claimsPrincipal = HttpContext.User;
+
+
+            if (claimsPrincipal.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Login");
+            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }

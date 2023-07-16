@@ -11,6 +11,10 @@ namespace AppData.Service
     public class SetKeyService : ISetKeyService
     {
         private DB_Context _context;
+        public SetKeyService()
+        {
+            _context = new DB_Context();
+        }
         public bool CreateSetKey(Setkey setkey)
         {
             try
