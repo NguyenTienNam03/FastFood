@@ -13,7 +13,7 @@ namespace AppView.Areas.Admin.Controllers
     {
 
         HttpClient client = new HttpClient();
-        private ICustomerService customerService; 
+        private ICustomerService customerService;
         public ViewAccountController()
         {
             customerService = new CustomerSevice();
@@ -67,33 +67,18 @@ namespace AppView.Areas.Admin.Controllers
         {
 
             ClaimsPrincipal claimsPrincipal = HttpContext.User;
-            //if (claimsPrincipal.Identity.IsAuthenticated)
-            //{
-                var user = HttpContext.User;
-                var email = user.FindFirstValue(ClaimTypes.Email);
-                //if (customerService.GetAllCus().Any(c => c.Email == email))
-                //{
-                    var idcustomer = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
-                    string url = $"https://localhost:7031/api/Cart/AddToCart?idfood={cartDetail.IDFood}&idcus={idcustomer}";
-                    var obj = JsonConvert.SerializeObject(cartDetail);
-                    StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
-                    HttpResponseMessage message = await client.PostAsync(url, content);
-                    //if (message.IsSuccessStatusCode)
-                    //{
-                        return RedirectToAction("Order" , "AdminAccount");
-                    //} else
-                    //{
-                    //    return RedirectToAction("Order", "AdminAccountController");
-                    //}
-                //}
-                //return RedirectToAction("Order", "AdminAccountController");
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Login");
 
+            var user = HttpContext.User;
+            var email = user.FindFirstValue(ClaimTypes.Email);
 
-            //}
+            var idcustomer = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
+            string url = $"https://localhost:7031/api/Cart/AddToCart?idfood={cartDetail.IDFood}&idcus={idcustomer}";
+            var obj = JsonConvert.SerializeObject(cartDetail);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage message = await client.PostAsync(url, content);
+
+            return RedirectToAction("Order", "AdminAccount");
+
         }
 
 

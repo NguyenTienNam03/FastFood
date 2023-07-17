@@ -1,4 +1,5 @@
 ﻿using AppData.Models;
+using AppData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace AppData.IService
 		public bool CreateCartDetail(CartDetail cartdetail);
 		public bool UpdateCartDetail(CartDetail cartdetail);
 		public bool DeleteCartDetail(Guid IDcartDetail);
+		public List<CartDetail> GetAllFull();
 		public List<CartDetail> GetAllCartDetail(Guid id);
 	}
 }

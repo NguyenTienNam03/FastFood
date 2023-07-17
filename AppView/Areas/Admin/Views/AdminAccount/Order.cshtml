@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Order";
     Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+    var image = ViewBag.Image;
+    var name = ViewBag.Name;
 }
 
 <div style="margin-top:100px;">
@@ -20,6 +22,12 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IDFood)
+                </th>
+                <th>
+                    <p>Name Food</p>
+                </th>
+                <th>
+                    <p>Image</p>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Quatity)
@@ -45,6 +53,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IDFood)
+                    </td>
+                    <td>
+                        <p>@name</p>
+                    </td>
+                    <td>
+                        <img src="~/img/Combo/@image" style="height:150px ; width:150px;">
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Quatity)

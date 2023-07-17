@@ -1,5 +1,6 @@
 ﻿using AppData.IService;
 using AppData.Models;
+using AppData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,12 @@ namespace AppData.Service
 			return _context.cartDetails.Where(c => c.IDCart == id).ToList();
 		}
 
-		public bool UpdateCartDetail(CartDetail cartdetail)
+        public List<CartDetail> GetAllFull()
+        {
+            return _context.cartDetails.ToList();
+        }
+
+        public bool UpdateCartDetail(CartDetail cartdetail)
 		{
 			try
 			{

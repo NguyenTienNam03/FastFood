@@ -1,4 +1,5 @@
-﻿using AppData.ViewModels;
+﻿using AppData.IService;
+using AppData.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
@@ -10,10 +11,10 @@ namespace AppData.Service
 {
 	public class ShowFullComboFF
 	{
-		public ComboFastFoodService _comboFastFoodService;
-		private DrinkService _drinkService;
-		private MainDishesService _mainDishesService;
-		private SideDishesService _sideDishesService;
+		public	IComboFastFoodService _comboFastFoodService;
+		private IDrinkService _drinkService;
+		private IMainDishesService _mainDishesService;
+		private ISideDishesService _sideDishesService;
 		public ShowFullComboFF()
 		{
 			_comboFastFoodService = new ComboFastFoodService();
