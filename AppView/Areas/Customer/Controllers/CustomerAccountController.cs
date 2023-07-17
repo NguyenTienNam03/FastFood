@@ -20,8 +20,7 @@ namespace AppView.Areas.Customer.Controllers
         public async Task<IActionResult> Order()
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User;
-            //if(claimsPrincipal.Identity.IsAuthenticated) 
-            //{
+
             var user = HttpContext.User;
             var email = user.FindFirstValue(ClaimTypes.Email);
             var id = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
@@ -29,8 +28,6 @@ namespace AppView.Areas.Customer.Controllers
             var repos = await client.GetAsync(url);
             var data = await repos.Content.ReadAsStringAsync();
             var orderbyid = JsonConvert.DeserializeObject<List<CartDetail>>(data);
-
-            //}
 
             return View(orderbyid);
         }

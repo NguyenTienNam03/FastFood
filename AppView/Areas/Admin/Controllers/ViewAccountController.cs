@@ -61,6 +61,7 @@ namespace AppView.Areas.Admin.Controllers
 
             return View();
         }
+        [HttpGet]
         [HttpPost]
         public async Task<IActionResult> AddToCart(CartDetail cartDetail)
         {
@@ -79,7 +80,7 @@ namespace AppView.Areas.Admin.Controllers
                     HttpResponseMessage message = await client.PostAsync(url, content);
                     //if (message.IsSuccessStatusCode)
                     //{
-                        return RedirectToAction("Order" , "AdminAccountController");
+                        return RedirectToAction("Order" , "AdminAccount");
                     //} else
                     //{
                     //    return RedirectToAction("Order", "AdminAccountController");
@@ -95,11 +96,6 @@ namespace AppView.Areas.Admin.Controllers
             //}
         }
 
-        public async Task<IActionResult> AddToCart(Guid idfood , Guid idcus)
-        {
-            string url = $"https://localhost:7031/api/Cart/AddToCart?idfood=2d608d0f-134c-4490-9203-abb7d6323493&idcus=7c0c20d5-9d83-47b7-b8da-da200ad01250";
-            return View();
-        }
 
     }
 }

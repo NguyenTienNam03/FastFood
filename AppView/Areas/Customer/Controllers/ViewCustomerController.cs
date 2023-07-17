@@ -60,6 +60,7 @@ namespace AppView.Areas.Customer.Controllers
 
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddToCart(CartDetail cartDetail)
         {
@@ -74,15 +75,9 @@ namespace AppView.Areas.Customer.Controllers
                 StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
                 HttpResponseMessage message = await client.PostAsync(url, content);
 
-                return RedirectToAction("Oder", "CustomerAccountController");
+                return RedirectToAction("Order", "CustomerAccount");
             //}
             //return RedirectToAction("Oder", "CustomerAccountController");
-        }
-
-        public async Task<IActionResult> AddToCart()
-        {
-            string urlcreatecart = "https://localhost:7031/api/Cart/CreateCart?id=7e189bc9-9257-433d-9e9c-75ee965024eb0";
-            return View();
         }
     }
 }

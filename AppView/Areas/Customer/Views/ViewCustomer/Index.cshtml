@@ -64,7 +64,7 @@
                                 $ @item.PriceCombo
 
                             </p>
-                            <a href="@Url.Action("ThemVaoGioHang",null)" class="btn btn-outline-primary btn-sm mt-2">Order</a>
+                            <a href="@Url.Action("AddToCart","ViewCustomer", new { IDFood = item.IDCombo}))" class="btn btn-outline-primary btn-sm mt-2">Order</a>
 
                         </div>
                         <!-- Menu Item -->
@@ -95,6 +95,7 @@
                             <p class="price">
                                 $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart","ViewCustomer", new { IDFood = item.IDMainDishes}))" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
 
                         <!-- Menu Item -->
@@ -125,6 +126,7 @@
                             <p class="price">
                                 $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart","ViewCustomer", new { IDFood = item.IDSideDishes}))" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
 
                     }
@@ -152,6 +154,7 @@
                             <p class="price">
                                 $ @item.Price
                             </p>
+                            <a href="@Url.Action("AddToCart","ViewCustomer", new { IDFood = item.IDDrink}))" class="btn btn-outline-primary btn-sm mt-2">Order</a>
                         </div>
                     }
                 </div>

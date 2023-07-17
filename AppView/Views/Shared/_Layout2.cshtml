@@ -18,38 +18,23 @@
         <div id="header" class="fixed-top d-flex align-items-cente">
             <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-                <h1 class="logo me-auto me-lg-0"><a href="~/Admin/ViewAccount/Index">FastFood</a></h1>
+                <h1 class="logo me-auto me-lg-0"><a asp-area="" asp-controller="Home" asp-action="Index">FastFood</a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
                 <nav id="navbar" class="navbar order-last order-lg-0">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="~/Admin/ViewAccount/Index">Home</a></li>
+                        <li><a class="nav-link scrollto active" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-                        <li class="dropdown">
-                            <a><span>Manage</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                        <li><a class="nav-link scrollto" href="#menu">Menu</a></li
+                         <li class="dropdown">
+                            <a href="#"><span>Đăng nhập</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li class="dropdown">
-                                    <a><span>Manage Food</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                                    <ul>
-                                        <li><a href="~/Admin/Manage/ManageCombo">ComBoFastFood</a></li>
-                                        <li><a href="~/Admin/Manage/GetAllMainDishes">MainDishes</a></li>
-                                        <li><a href="~/Admin/Manage/GetAllSideDishes">SideDishes</a></li>
-                                        <li><a href="~/Admin/Manage/ShowAllDrink">Drinks</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="~/Admin/Manage/ManageCombo">Manage Customer</a></li>
-                                <li><a href="~/Admin/Manage/ManageCombo">Manage Voucher</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#"><span>Admin</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="~/Admin/AdminAccount/Order">Order</a></li>
-                                <li><a href="~/Admin/Manage/ManageCombo">Bill</a></li>
-                                <li><a href="~/Admin/Manage/ManageCombo">Setting</a></li>
-                                <li><a href="~/Admin/Manage/ManageCombo">Logout</a></li>
+                                <li><a asp-area="" asp-controller="Login" asp-action="Login">Login/Register</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Order</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Bill</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Setting</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

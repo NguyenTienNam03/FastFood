@@ -77,13 +77,13 @@ namespace AppAPI.Controllers
 					if(_mainDishesService.GetMainDishes().Any(c => c.IDMainDishes == idfood) == true)
 					{
                         setkey.IDMain = _mainDishesService.GetMainDishes().First(c => c.IDMainDishes == idfood).IDMainDishes == idfood ? idfood : null;
-                    } else if ( _comboFastFoodService.GetList().Any(c => c.IDCombo == idfood) == true)
+                    } if ( _comboFastFoodService.GetList().Any(c => c.IDCombo == idfood) == true)
 					{
                         setkey.IDCombo = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).IDCombo == idfood ? idfood : null;
-                    } else if ( _drinkService.GetAllDrinks().Any(c => c.IDDrink == idfood) == true)
+                    } if ( _drinkService.GetAllDrinks().Any(c => c.IDDrink == idfood) == true)
 					{
                         setkey.IDDrink = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).IDDrink == idfood ? idfood : null;
-                    } else
+                    } if (_sideDishesService.GetAllSideDishes().Any(c => c.IDSideDishes == idfood) == true)
 					{
                         setkey.IDSide = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).IDSideDishes == idfood ? idfood : null;
                     }
@@ -98,17 +98,17 @@ namespace AppAPI.Controllers
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).Price;
                     }
-                    else if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDDrink != null)
+                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDDrink != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).Price;
                     }
-                    else if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDMain != null)
+                    if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDMain != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).Price;
                     }
-					else
+					if(_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDSide != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).Price;
