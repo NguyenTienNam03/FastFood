@@ -42,6 +42,11 @@
             @foreach (var item in Model)
             {
                 <tr>
+
+                    @{
+                        double Total = 0;
+                        Total = (double)item.Price * item.Quatity;
+                    }
                     @*<td>
                         @Html.DisplayFor(modelItem => item.IDCartDetail)
                     </td>
@@ -58,19 +63,30 @@
                         <p>@namefood</p>
                     </td>
                     <td>
-                        <img src="~/img/Combo/@image" style="height:150px; width:150px;">
+                        <img src="~/img/Combo/@image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quatity)
+                        <form action="~/Customer/CustomerAccount/UpdateAmount" UpdateAmount method="post">
+                            @if (ViewBag.Error != null)
+                            {
+                                <p class="alert alert-danger">@ViewBag.Error</p>
+                            }
+                            <input type="hidden" name="IDCartDetail" value="@item.IDCartDetail" />
+                            <input type="number" name="Quatity" value="@item.Quatity" />
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        </form>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
+                    <th>
+                        <p>@Total</p>
+                    </th>
+                    <th style="text-align:center;">
+                        <a href="@Url.Action("RemoveItem",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                    </th>
+                </tr>
+                <tr>
                 </tr>
             }
         </tbody>

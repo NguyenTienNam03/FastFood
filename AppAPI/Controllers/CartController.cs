@@ -142,5 +142,12 @@ namespace AppAPI.Controllers
 		{
 			return _cartDetailService.DeleteCartDetail(id);
 		}
+		[HttpPut("[action]")] 
+		public bool UpdateQuatity(Guid id, Guid idcardetail , int quatity)
+		{
+			CartDetail cartDetail = _cartDetailService.GetAllCartDetail(id).FirstOrDefault(c => c.IDCartDetail == idcardetail);
+			cartDetail.Quatity = quatity;
+			return _cartDetailService.UpdateCartDetail(cartDetail);
+		}
 	}
 }
