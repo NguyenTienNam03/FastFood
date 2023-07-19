@@ -60,9 +60,9 @@ namespace AppView.Areas.Customer.Controllers
 
             return View();
         }
+
         [HttpGet]
         [HttpPost]
-
         public async Task<IActionResult> AddToCart(CartDetail cartDetail)
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User;

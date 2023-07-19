@@ -11,18 +11,18 @@
     <table class="table" style="color:white;">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.IDCartDetail)
+                @* <th>
+                @Html.DisplayNameFor(model => model.IDCartDetail)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDCart)
+                @Html.DisplayNameFor(model => model.IDCart)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDsetkey)
+                @Html.DisplayNameFor(model => model.IDsetkey)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IDFood)
-                </th>
+                @Html.DisplayNameFor(model => model.IDFood)
+                </th>*@
                 <th>
                     <p>Name Food</p>
                 </th>
@@ -30,10 +30,14 @@
                     <p>Image</p>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Quatity)
+                    Quatity
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    Price
+                </th>
+                </th>
+                <th>
+                    <p>Total</p>
                 </th>
                 <th></th>
             </tr>
@@ -41,39 +45,59 @@
         <tbody>
             @foreach (var item in Model)
             {
+
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IDCartDetail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IDCart)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IDsetkey)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IDFood)
-                    </td>
+                    @{
+                        double Total = 0;
+                        Total = (double)item.Price * item.Quatity;
+                    }
+                    @* <td>
+                @Html.DisplayFor(modelItem => item.IDCartDetail)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.IDCart)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.IDsetkey)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.IDFood)
+                </td>*@
                     <td>
                         <p>@name</p>
                     </td>
                     <td>
-                        <img src="~/img/Combo/@image" style="height:150px ; width:150px;">
+                        <img src="~/img/Combo/@image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quatity)
+                        <form action="~/Admin/AdminAccount/UpdateAmount" UpdateAmount method="post">
+                            @if (ViewBag.Error != null)
+                            {
+                                <p class="alert alert-danger">@ViewBag.Error</p>
+                            }
+                            <input type="hidden" name="IDCartDetail" value="@item.IDCartDetail" />
+                            <input type="number" name="Quatity" value="@item.Quatity" />
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        </form>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
+                    <th>
+                        <p>@Total.ToString("#.#0").Replace(',', '.')</p>
+                    </th>
+                    <th style="text-align:center;">
+                        <a href="@Url.Action("RemoveItem","AdminAccount",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                    </th>
                 </tr>
             }
+        <td colspan="4" style="text-align:center;">TOTAL AMOUNT:</td>
+        <td>$ @Model.Sum(m => (double) m.Price * m.Quatity)</td>
+        <th style="text-align:center;">
+            <a class="btn btn-success">Thanh toan</a>
+        </th>
         </tbody>
+
     </table>
 </div>
 

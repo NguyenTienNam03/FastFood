@@ -83,7 +83,7 @@
                         <p>@Total</p>
                     </th>
                     <th style="text-align:center;">
-                        <a href="@Url.Action("RemoveItem",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                        <a href="@Url.Action("RemoveItem","CustomerAccount",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
                     </th>
                 </tr>
                 <tr>
