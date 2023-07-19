@@ -39,30 +39,6 @@ namespace AppView.Areas.Customer.Controllers
             var repos = await client.GetAsync(url);
             var data = await repos.Content.ReadAsStringAsync();
             var order = JsonConvert.DeserializeObject<List<CartDetail>>(data);
-            foreach (var item in cartDetailService.GetAllCartDetail(id))
-            {
-                var idfood = item.IDFood;
-                if (_drinkservice.GetAllDrinks().Any(c => c.IDDrink == idfood))
-                {
-                    ViewBag.Imagedrink = _drinkservice.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).Image;
-                    ViewBag.Namedrink = _drinkservice.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).NameDrink;
-                }
-                else if (comboFastFoodservice.GetList().Any(c => c.IDCombo == idfood))
-                {
-                    ViewBag.ImageCombo = comboFastFoodservice.GetList().FirstOrDefault(c => c.IDCombo == idfood).Image;
-                    ViewBag.NameCombo = comboFastFoodservice.GetList().FirstOrDefault(c => c.IDCombo == idfood).NameCombo;
-                }
-                else if (sideDishesService.GetAllSideDishes().Any(c => c.IDSideDishes == idfood))
-                {
-                    ViewBag.ImageSide = sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).Image;
-                    ViewBag.NameSide = sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).NameSideDishes;
-                }
-                else if (mainDishesService.GetMainDishes().Any(c => c.IDMainDishes == idfood))
-                {
-                    ViewBag.ImageMain = mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).Image;
-                    ViewBag.NameMain = mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).NameMainDishes;
-                }
-            }
 
             return View(order);
         }

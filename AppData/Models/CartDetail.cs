@@ -17,7 +17,9 @@ namespace AppData.Models
         [ForeignKey(nameof(Setkey))]
         public Guid IDsetkey { get; set; }
 		public Guid IDFood { get; set; }
-		public int Quatity { get; set; }
+        public string NameFood { get; set; }
+        public string Image { get; set; }
+        public int Quatity { get; set; }
 		public decimal Price { get; set; }
 
 		public virtual Cart Cart { get; set; }

@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Order";
     Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
-    var image = ViewBag.Image;
-    var name = ViewBag.Name;
 }
 
 <div style="margin-top:100px;">
@@ -24,10 +22,10 @@
                 @Html.DisplayNameFor(model => model.IDFood)
                 </th>*@
                 <th>
-                    <p>Name Food</p>
+                    @Html.DisplayNameFor(model => model.NameFood)
                 </th>
                 <th>
-                    <p>Image</p>
+                    @Html.DisplayNameFor(model => model.Image)
                 </th>
                 <th>
                     Quatity
@@ -64,10 +62,10 @@
                 @Html.DisplayFor(modelItem => item.IDFood)
                 </td>*@
                     <td>
-                        <p>@name</p>
+                        @Html.DisplayFor(modelItem => item.NameFood)
                     </td>
                     <td>
-                        <img src="~/img/Combo/@image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
+                        <img src="~/img/Combo/@item.Image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
                     </td>
                     <td>
                         <form action="~/Admin/AdminAccount/UpdateAmount" UpdateAmount method="post">

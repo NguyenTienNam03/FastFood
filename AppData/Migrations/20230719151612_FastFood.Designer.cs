@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppData.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    [Migration("20230714160208_FastFood")]
+    [Migration("20230719151612_FastFood")]
     partial class FastFood
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,8 +119,16 @@ namespace AppData.Migrations
                     b.Property<Guid>("IDFood")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("MainDishesIDMainDishes")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NameFood")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -181,8 +189,16 @@ namespace AppData.Migrations
                     b.Property<Guid>("IDsetkey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("MainDishesIDMainDishes")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NameFood")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

@@ -15,6 +15,8 @@ namespace AppData.Models
 		[ForeignKey(nameof(Bill))]
 		public Guid IDBill { get; set; }
 		public Guid IDFood { get ; set; }
+		public string NameFood { get; set; }
+		public string Image { get ; set; }
 		public int Quatity { get; set; }
 		public decimal Price { get; set; }
 

@@ -117,8 +117,16 @@ namespace AppData.Migrations
                     b.Property<Guid>("IDFood")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("MainDishesIDMainDishes")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NameFood")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -179,8 +187,16 @@ namespace AppData.Migrations
                     b.Property<Guid>("IDsetkey")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("MainDishesIDMainDishes")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NameFood")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

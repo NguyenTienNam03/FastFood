@@ -24,10 +24,10 @@
                     @Html.DisplayNameFor(model => model.IDFood)
                 </th>*@
                 <th>
-                    <p>NameFood</p>
+                    @Html.DisplayNameFor(model => model.NameFood)
                 </th>
                 <th>
-                    <p>Image</p>
+                    @Html.DisplayNameFor(model => model.Image)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Quatity)
@@ -60,10 +60,10 @@
                         @Html.DisplayFor(modelItem => item.IDFood)
                     </td>*@
                      <td>
-                        <p>@namefood</p>
+                        @Html.DisplayFor(modelItem => item.NameFood)
                     </td>
                     <td>
-                        <img src="~/img/Combo/@image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
+                        <img src="~/img/Combo/@item.Image?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM" style="height:150px; width:150px;">
                     </td>
                     <td>
                         <form action="~/Customer/CustomerAccount/UpdateAmount" UpdateAmount method="post">

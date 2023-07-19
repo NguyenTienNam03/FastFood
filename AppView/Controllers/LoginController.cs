@@ -68,10 +68,12 @@ namespace AppView.Controllers
                 var rolecust = _roleser.GetAllRoles().FirstOrDefault(c => c.RoleName == "Customer");
                 if (idcus.IDRole == roleadmin.IDRole && idcus.PassWord == customer.PassWord)
                 {
+					ViewBag.FullName = idcus.NameCustomer;
                     return RedirectToAction("Index", "ViewAccount", new { area = "Admin" });
                 }
                 else if (idcus.IDRole == rolecust.IDRole && idcus.PassWord == customer.PassWord)
                 {
+                    ViewBag.FullName = idcus.NameCustomer;
                     return RedirectToAction("Index", "ViewCustomer", new { area = "Customer" });
                 }
                 else

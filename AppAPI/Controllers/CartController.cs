@@ -97,21 +97,29 @@ namespace AppAPI.Controllers
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).Price;
+						cartDetail.NameFood = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).NameCombo;
+						cartDetail.Image = _comboFastFoodService.GetList().FirstOrDefault(c => c.IDCombo == idfood).Image;
                     }
                     if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDDrink != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).Price;
+                        cartDetail.NameFood = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).NameDrink;
+                        cartDetail.Image = _drinkService.GetAllDrinks().FirstOrDefault(c => c.IDDrink == idfood).Image;
                     }
                     if (_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDMain != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).Price;
+                        cartDetail.NameFood = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).NameMainDishes;
+                        cartDetail.Image = _mainDishesService.GetMainDishes().FirstOrDefault(c => c.IDMainDishes == idfood).Image;
                     }
 					if(_setkeyservice.GetSetKeys().FirstOrDefault(c => c.IDSetKey == setkey.IDSetKey).IDSide != null)
                     {
                         cartDetail.IDFood = idfood;
                         cartDetail.Price = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).Price;
+                        cartDetail.NameFood = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).NameSideDishes;
+                        cartDetail.Image = _sideDishesService.GetAllSideDishes().FirstOrDefault(c => c.IDSideDishes == idfood).Image;
                     }
                     cartDetail.Quatity = 1;
                     return _cartDetailService.CreateCartDetail(cartDetail); // them vao 
