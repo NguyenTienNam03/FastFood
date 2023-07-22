@@ -55,32 +55,101 @@ namespace AppView.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [HttpPost]
-        public async Task<IActionResult> CreateCombo(ComboFastFood comboFastFood)
+        public async Task<IActionResult> CreateCombo()
         {
             ViewBag.dirnk = new SelectList(_context.drinks.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameDrink), "IDDrink", "NameDrink");
             ViewBag.main = new SelectList(_context.mainDishes.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameMainDishes), "IDMainDishes", "NameMainDishes");
             ViewBag.side = new SelectList(_context.sideDishes.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameSideDishes), "IDSideDishes", "NameSideDishes");
+            return View();
+        }
 
-            string urlfull = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&idmain={comboFastFood.IDMainDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
-            string url2 = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
-            string url3 = $"https://localhost:7031/api/ComboFastFood/AddCombo?idmain={comboFastFood.IDMainDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
-            string url4 = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&idmain={comboFastFood.IDMainDishes}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
-            var obj = JsonConvert.SerializeObject(comboFastFood);
-            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
-
-            Task<HttpResponseMessage> reposcombo = client.PostAsync(urlfull, content);
-            Task<HttpResponseMessage> reposdrink = client.PostAsync(url2, content);
-            Task<HttpResponseMessage> reposside = client.PostAsync(url3, content);
-            Task<HttpResponseMessage> reposmain = client.PostAsync(url4, content);
-            Task.WhenAll(reposcombo, reposdrink, reposmain, reposside);
-            if (reposcombo.IsCompletedSuccessfully || reposdrink.IsCompletedSuccessfully || reposside.IsCompletedSuccessfully || reposmain.IsCompletedSuccessfully)
+        [HttpPost]
+        public async Task<IActionResult> CreateCombo(ComboFastFood comboFastFood)
+        {
+            //ViewBag.dirnk = new SelectList(_context.drinks.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameDrink), "IDDrink", "NameDrink");
+            //ViewBag.main = new SelectList(_context.mainDishes.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameMainDishes), "IDMainDishes", "NameMainDishes");
+            //ViewBag.side = new SelectList(_context.sideDishes.ToList().Where(c => c.Status == 1).OrderBy(c => c.NameSideDishes), "IDSideDishes", "NameSideDishes");
+            if (comboFastFood.IDDrink == null)
             {
+                AddNoDrink(comboFastFood);
+                return RedirectToAction("ManageCombo", "Manage");
+            }
+            else if (comboFastFood.IDMainDishes == null)
+            {
+                AddNoMain(comboFastFood);
+                return RedirectToAction("ManageCombo", "Manage");
+            }
+            else if (comboFastFood.IDSideDishes == null)
+            {
+                AddNoSide(comboFastFood);
+                return RedirectToAction("ManageCombo", "Manage");
+
+            }
+            else if (comboFastFood.IDDrink != null && comboFastFood.IDMainDishes != null && comboFastFood.IDSideDishes != null)
+            {
+                AddFullComBo(comboFastFood);
                 return RedirectToAction("ManageCombo", "Manage");
             }
             else
             {
-                return View();
+                return RedirectToAction("CreateCombo", "Manage");
+            }
+        }
+
+        private bool AddFullComBo(ComboFastFood comboFastFood)
+        {
+            string url = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&idmain={comboFastFood.IDMainDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
+            var obj = JsonConvert.SerializeObject(comboFastFood);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponseMessage = client.PostAsync(url, content).Result;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private async Task<bool> AddNoDrink(ComboFastFood comboFastFood)
+        {
+            string url = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&idmain={comboFastFood.IDMainDishes}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
+            var obj = JsonConvert.SerializeObject(comboFastFood);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponseMessage = await client.PostAsJsonAsync(url, content);
+
+
+                return true;
+
+        }
+        private bool AddNoMain(ComboFastFood comboFastFood)
+        {
+            string url = $"https://localhost:7031/api/ComboFastFood/AddCombo?idside={comboFastFood.IDSideDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
+            var obj = JsonConvert.SerializeObject(comboFastFood);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponseMessage = client.PostAsync(url, content).Result;
+
+                return true;
+
+          
+        }
+        private bool AddNoSide(ComboFastFood comboFastFood)
+        {
+            string url = $"https://localhost:7031/api/ComboFastFood/AddCombo?idmain={comboFastFood.IDMainDishes}&iddrink={comboFastFood.IDDrink}&name={comboFastFood.NameCombo}&anh={comboFastFood.Image}&mota={comboFastFood.DescriptionCombo}&trangthai=1";
+            var obj = JsonConvert.SerializeObject(comboFastFood);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponseMessage = client.PostAsync(url, content).Result;
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+
+                return true;
+
+            }
+            else
+            {
+                return false;
             }
         }
         [HttpGet]
@@ -107,10 +176,6 @@ namespace AppView.Areas.Admin.Controllers
             return View(lstDrink);
         }
         [HttpGet]
-        public async Task<IActionResult> AddDrink()
-        {
-            return View();
-        }
         [HttpPost]
         public async Task<IActionResult> AddDrink(Drinks drinks)
         {
@@ -124,7 +189,7 @@ namespace AppView.Areas.Admin.Controllers
             }
             else
             {
-                return RedirectToAction("AddDrink", "Manage");
+                return View();
             }
         }
         [HttpGet]

@@ -29,10 +29,10 @@ namespace AppAPI.Controllers
 		}
 		// GET: api/<ComboFastFoodController>
 		[HttpGet("[action]")]
-		public IEnumerable<ComboFastFoodViewModel> ShowComboFF()
+		public List<ComboFastFoodViewModel> ShowComboFF()
 		{
 			return _comboviewmodel.ShowCombo();
-		}
+        }
 
 		// GET api/<ComboFastFoodController>/5
 		[HttpGet("[action]")]
@@ -66,15 +66,15 @@ namespace AppAPI.Controllers
 			}
 			else
 			{
-				if (iddrink == null && idmain == null && idside != null || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == null && c.IDDrink == iddrink && c.IDSideDishes == idside))
+				if ((iddrink == null && idmain == null && idside != null) || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == null && c.IDDrink == iddrink && c.IDSideDishes == idside))
 				{
 					return false;
 				}
-				else if (iddrink == null && idmain != null && idside == null || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == iddrink && c.IDDrink == null && c.IDSideDishes == idside))
+				else if ((iddrink == null && idmain != null && idside == null) || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == idmain && c.IDDrink == null && c.IDSideDishes == idside))
 				{
 					return false;
 				}
-				else if (iddrink != null && idmain == null && idside == null || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == iddrink && c.IDDrink == iddrink && c.IDSideDishes == null))
+				else if ((iddrink != null && idmain == null && idside == null) || _comboFastFoodService.GetList().Any(c => c.IDMainDishes == idmain && c.IDDrink == iddrink && c.IDSideDishes == null))
 				{
 					return false;
 				}
@@ -89,10 +89,11 @@ namespace AppAPI.Controllers
 					comboFastFood.NameCombo = name;
 					comboFastFood.Image = anh;
 					comboFastFood.Price = (iddrink == null ? 0 : drink.Price) + (idside == null ? 0 : side.Price) + (idmain == null ? 0 : main.Price);
-					comboFastFood.PriceCombo = (iddrink == null ? 0 : drink.Price) + (idside == null ? 0 : side.Price) + (idmain == null ? 0 : main.Price) - ((iddrink == null ? 0 : drink.Price) + (idside == null ? 0 : side.Price) + (idmain == null ? 0 : main.Price) * 10 / 100);
+					comboFastFood.PriceCombo = (iddrink == null ? 0 : drink.Price) + (idside == null ? 0 : side.Price) + (idmain == null ? 0 : main.Price) - (((iddrink == null ? 0 : drink.Price) + (idside == null ? 0 : side.Price) + (idmain == null ? 0 : main.Price)) * 10 / 100);
 					comboFastFood.DescriptionCombo = mota;
 					comboFastFood.Status = trangthai;
-					return _comboFastFoodService.CreateCombo(comboFastFood);
+					_comboFastFoodService.CreateCombo(comboFastFood);
+					return true;
 				}
 			}
 		}
@@ -142,8 +143,10 @@ namespace AppAPI.Controllers
 				drinks.Image = image;
 				drinks.Mass = khoiluong;
 				drinks.Status = 1;
-				return _drinkService.CreateDrink(drinks);
-			}
+				 _drinkService.CreateDrink(drinks);
+                return true;
+
+            }
 			else
 			{
 				return false;

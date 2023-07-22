@@ -20,7 +20,7 @@ namespace AppData.Models
 		[ForeignKey(nameof(Payments))]
 		public Guid IDPayment { get; set; }
 		public string InvoiceCode { get ; set; }
-		public string Quatity { get ; set; }
+		public int Quatity { get ; set; }
 		public string NameReceiver { get ; set; }
 		public string PhoneReceiver { get ; set; }
 		public string CityReceiver { get; set; }

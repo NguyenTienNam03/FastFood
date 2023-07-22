@@ -13,7 +13,8 @@ namespace AppData.Models
 		public Guid IDVoucher { get ; set; }
 		public string VoucherCode { get; set; }
 		public int Quatity { get; set; }
-		public DateTime CreateDate { get; set; }
+		public decimal VoucherValue { get; set; }
+        public DateTime CreateDate { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 		public decimal Condition { get; set; }

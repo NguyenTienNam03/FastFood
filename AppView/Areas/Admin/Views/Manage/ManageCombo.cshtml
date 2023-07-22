@@ -54,13 +54,22 @@
                         @Html.DisplayFor(modelItem => item.IDCombo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SideDishes)
+                        @if(item.SideDishes != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.SideDishes)
+                        }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MainDishes)
+                        @if (item.MainDishes != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.MainDishes)
+                        }  
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Drink)
+                        @if (item.Drink != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Drink)
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NameCombo)

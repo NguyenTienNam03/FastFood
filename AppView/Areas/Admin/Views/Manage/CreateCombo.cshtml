@@ -11,7 +11,7 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form action="~/Admin/Manage/CreateCombo" enctype="multipart/form-data" method="post">
+            <form action="~/Admin/Manage/CreateCombo"  method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group row" style="display:none;">
                     <label asp-for="IDCombo" class="control-label col-3"></label>
@@ -45,15 +45,14 @@
                     <span asp-validation-for="NameCombo" class="text-danger"></span>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Image" class="control-label col-3">Image</label>
+                    <label for="Image" class="control-label col-3">Image</label>
                     <div class="col-9">
-                        @Html.TextBoxFor(model => model.Image, new { type = "file", @class = "form-control" } )
-                        <br />
+                        @Html.TextBoxFor(m => m.Image, new { type = "file", @class = "form-control" } )
+ 
                         @*<img src="~/images/@Model.Image" asp-append-version="true" width="200px" height="200px">
                         @Html.Hidden("oldimage", @Model.Image)*@
-                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
                     </div>
-                    
                 </div>
                 @*<div class="form-group">
                     <label asp-for="Price" class="control-label"></label>
