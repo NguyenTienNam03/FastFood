@@ -11,10 +11,10 @@
     <p>
         <a href="~/Admin/Voucher/AddPayment">Create New</a>
     </p>
-    <table class="table">
+    <table class="table" style="color:white;">
         <thead>
             <tr>
-                <th>
+                <th style="display:none;">
                     @Html.DisplayNameFor(model => model.IDPayment)
                 </th>
                 <th>
@@ -45,7 +45,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none;">
                         @Html.DisplayFor(modelItem => item.IDPayment)
                     </td>
                     <td>
@@ -67,12 +67,17 @@
                         @Html.DisplayFor(modelItem => item.ImageQR)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
+                        @if(item.Status == 1)
+                        {
+                            <p>Hoạt động</p>
+                        } else if(item.Status == 0)
+                        {
+                            <p>Không hoạt động</p>
+                        }
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit", "UpdatePayment", new { IDPayment=item.IDPayment }) |
+                        @Html.ActionLink("Delete", "Deletepayment", new { IDPayment=item.IDPayment })
                     </td>
                 </tr>
             }

@@ -80,5 +80,13 @@ namespace AppView.Areas.Customer.Controllers
             //}
             //return RedirectToAction("Oder", "CustomerAccountController");
         }
+        [HttpGet]
+        [HttpPost]
+
+        public async Task<IActionResult> Pay()
+        {
+            
+            return View();
+        }
     }
 }

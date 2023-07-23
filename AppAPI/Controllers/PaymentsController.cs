@@ -44,6 +44,7 @@ namespace AppAPI.Controllers
 			payments.Description = mota;
 			payments.BankName = bankname;
 			payments.ImageQR = Imageqr;
+			payments.Status = 1;
 			return _paymentsService.CreatePayment(payments);
     }
 
@@ -63,7 +64,7 @@ namespace AppAPI.Controllers
 		}
 
 		// DELETE api/<PaymentsController>/5
-		[HttpDelete("[action]")]
+		[HttpPut("[action]")]
 		public bool DeletePayment(Guid id)
 		{
 			return (_paymentsService.DeletePayment(id));
