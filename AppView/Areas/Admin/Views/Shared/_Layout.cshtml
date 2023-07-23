@@ -40,8 +40,9 @@
                                         <li><a href="~/Admin/Manage/ShowAllDrink">Drinks</a></li>
                                     </ul>
                                 </li>
-                                <li><a asp-area="Admin" asp-controller="Home" asp-action="">Manage Customer</a></li>
-                                <li><a asp-area="Admin" asp-controller="Home" asp-action="">Voucher</a></li>
+                                <li><a a href="~/Admin/Manage/ManageCustomer">Manage Customer</a></li>
+                                <li><a href="~/Admin/Voucher/GetAllVoucher">Voucher</a></li>
+                                <li><a a href="~/Admin/Payment/GetAllPayment">Payments</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -69,7 +70,7 @@
             </div>
 
             <div class="row gy-4">
-                <div class="col-lg-7 position-relative about-img" src="~/img/about.jpg"  data-aos="fade-up" data-aos-delay="150">
+                <div class="col-lg-7 position-relative about-img" style="background-image: url(../img/about.jpg) ;" data-aos="fade-up" data-aos-delay="150">
                     @* <div class="call-us position-absolute">
                     <h4>Book a Table</h4>
                     <p>+1 5589 55488 55</p>

@@ -63,24 +63,32 @@ namespace AppView.Controllers
 			}
 			else
 			{
-                var idcus = _customerService.GetAllCus().FirstOrDefault(c => c.Email == customer.Email &&  c.Status == 1);
+                var idcus = _customerService.GetAllCus().FirstOrDefault(c => c.Email == customer.Email );
                 var roleadmin = _roleser.GetAllRoles().FirstOrDefault(c => c.RoleName == "Admin");
                 var rolecust = _roleser.GetAllRoles().FirstOrDefault(c => c.RoleName == "Customer");
-                if (idcus.IDRole == roleadmin.IDRole && idcus.PassWord == customer.PassWord)
-                {
-					ViewBag.FullName = idcus.NameCustomer;
-                    return RedirectToAction("Index", "ViewAccount", new { area = "Admin" });
-                }
-                else if (idcus.IDRole == rolecust.IDRole && idcus.PassWord == customer.PassWord)
-                {
-                    ViewBag.FullName = idcus.NameCustomer;
-                    return RedirectToAction("Index", "ViewCustomer", new { area = "Customer" });
-                }
-                else
-                {
-                    ViewBag.ErrorLogin = "Dang nhap that bai. Ban kiem tra mat khau va email.";
-                    return View();
-                }
+				if(idcus.Status == 1)
+				{
+                    if (idcus.IDRole == roleadmin.IDRole && idcus.PassWord == customer.PassWord)
+                    {
+                        ViewBag.FullName = idcus.NameCustomer;
+                        return RedirectToAction("Index", "ViewAccount", new { area = "Admin" });
+                    }
+                    else if (idcus.IDRole == rolecust.IDRole && idcus.PassWord == customer.PassWord)
+                    {
+                        ViewBag.FullName = idcus.NameCustomer;
+                        return RedirectToAction("Index", "ViewCustomer", new { area = "Customer" });
+                    }
+                    else
+                    {
+                        ViewBag.ErrorLogin = "Dang nhap that bai. Ban kiem tra mat khau va email.";
+                        return View();
+                    }
+                } else
+				{
+					ViewBag.TrangThai = "Tài Khoản của bạn đã dừng hoạt động. Bạn vui lòng kích hoạt lại bằng cách liên chúng tôi qua mail hoặc bạn có thể quên mật khẩu.";
+					return View();
+				}
+                
             }
 		}
 		[HttpGet]

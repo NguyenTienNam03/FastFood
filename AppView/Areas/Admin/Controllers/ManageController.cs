@@ -27,16 +27,38 @@ namespace AppView.Areas.Admin.Controllers
             _maindishesservice = new MainDishesService();
             _sidedishesservice = new SideDishesService();
         }
-        [HttpGet]
-        public IActionResult ManageCustomer()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public IActionResult ManageCustomer(AppData.Models.Customer customer)
+        [HttpGet]
+        public async Task<IActionResult> ManageCustomer()
         {
-            return View();
+            string url = $"https://localhost:7031/api/Customer/GetAllcus";
+            var repos = await client.GetAsync(url);
+            var data = await repos.Content.ReadAsStringAsync();
+            var customer1 = JsonConvert.DeserializeObject <List<AppData.Models.Customer>>(data); 
+
+            return View(customer1);
+        }
+        [HttpGet]
+        [HttpPut]
+        public async Task<IActionResult> TurnOff(AppData.Models.Customer customer)
+        {
+            string url = $"https://localhost:7031/api/Customer/TurnOff?id={customer.IDCustomer}";
+            var obj = JsonConvert.SerializeObject(customer);
+            StringContent content = new StringContent(obj , Encoding.UTF8 , "application/json");
+            HttpResponseMessage httpResponseMessage = await client.PutAsync(url, content);
+
+            return RedirectToAction("ManageCustomer", "Manage");
+        }
+        [HttpGet]
+        [HttpPut]
+        public async Task<IActionResult> TurnOn(AppData.Models.Customer customer)
+        {
+            string url = $"https://localhost:7031/api/Customer/TurnOn?id={customer.IDCustomer}";
+            var obj = JsonConvert.SerializeObject(customer);
+            StringContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponseMessage = await client.PutAsync(url, content);
+
+            return RedirectToAction("ManageCustomer", "Manage");
         }
         // Manage ComboFastFood
         [HttpGet]
@@ -48,6 +70,7 @@ namespace AppView.Areas.Admin.Controllers
             var combo = JsonConvert.DeserializeObject<List<ComboFastFoodViewModel>>(data);
             return View(combo);
         }
+       
         [HttpGet]
         public async Task<IActionResult> GetComboByID(Guid id)
         {
@@ -225,9 +248,12 @@ namespace AppView.Areas.Admin.Controllers
             {
                 return RedirectToAction("ShowAllDrink", "Manage");
             }
-            return RedirectToAction("UpdateDrink", "Manage");
+            else
+            {
+                return RedirectToAction("UpdateDrink", "Manage");
+            }
         }
-
+        [HttpPost]
         public async Task<IActionResult> DeleteDrink(Drinks drinks)
         {
             string url = $"https://localhost:7031/api/ComboFastFood/DeleteDrink?id={drinks.IDDrink}";
@@ -300,7 +326,10 @@ namespace AppView.Areas.Admin.Controllers
             {
                 return RedirectToAction("GetAllMainDishes", "Manage");
             }
-            return View(main);
+            else
+            {
+                return View(main);
+            }
         }
 
         [HttpPost]

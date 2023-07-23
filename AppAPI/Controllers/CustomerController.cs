@@ -109,9 +109,23 @@ namespace AppAPI.Controllers
 			}
 			
 		}
+        [HttpPut("[action]")]
+        public bool TurnOn(Guid id)
+        {
+			Customer customer = _customerService.GetAllCus().FirstOrDefault(c => c.IDCustomer == id);
+			customer.Status = 1;
+			return _customerService.UpdateCustomer(customer);
+        }
+        [HttpPut("[action]")]
+        public bool TurnOff(Guid id)
+        {
+            Customer customer = _customerService.GetAllCus().FirstOrDefault(c => c.IDCustomer == id);
+            customer.Status = 0;
+            return _customerService.UpdateCustomer(customer);
+        }
 
-		// DELETE api/<CustomerController>/5
-		[HttpPut("[action]")]
+        // DELETE api/<CustomerController>/5
+        [HttpPut("[action]")]
 		public bool DeleteCus(Guid id)
 		{
 			return _customerService.DeleteCustomer(id);

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<AppData.Models.Customer>
+
+@{
+    ViewData["Title"] = "ManageCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin-top:100px;">
+    <h1>ManageCustomer</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table" style="color:white;">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDCustomer)
+                </th>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDRole)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameCustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.PassWord)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.District)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDCustomer)
+                    </td>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDRole)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.PassWord)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.District)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @if(item.Status == 1)
+                        {
+                            <p>Hoạt động</p>
+                        }
+                        @if(item.Status == 0)
+                        {
+                            <p>Không hoạt động</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Turn on activity","TurnOn",  new { IDCustomer = item.IDCustomer }) |
+                        @Html.ActionLink("Turn off activity","TurnOff",  new { IDCustomer = item.IDCustomer })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

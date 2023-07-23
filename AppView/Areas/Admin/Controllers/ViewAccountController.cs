@@ -81,6 +81,12 @@ namespace AppView.Areas.Admin.Controllers
 
         }
 
+        [HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> pay(Bill bill)
+        {
+            return View();
+        }
 
     }
 }

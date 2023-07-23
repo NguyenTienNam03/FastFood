@@ -34,18 +34,18 @@ namespace AppAPI.Controllers
 		[HttpPost("[action]")]
 		public bool CreateVoucher(string vouchercode , int soluong  , DateTime ngaybd , DateTime ngaykethuc, decimal dieukien, string mota )
 		{
-			if(_voucherService.GetAllVouchers().Any(c => c.VoucherCode == vouchercode && c.StartDate == ngaybd && c.EndDate == ngaykethuc))
+			if(_voucherService.GetAllVouchers().Any(c => c.VoucherCode == vouchercode && c.StartDate == ngaybd && c.EndDate == ngaykethuc) == false)
 			{
 				Voucher voucher = new Voucher();
 				voucher.IDVoucher = Guid.NewGuid();
 				voucher.VoucherCode = vouchercode;
 				voucher.Quatity = soluong;
 				voucher.CreateDate = DateTime.Now;
-				if (ngaybd.Date > DateTime.Now.Date && ngaykethuc.Date > ngaybd.Date)
-				{
+				//if (ngaybd.Date > DateTime.Now.Date && ngaykethuc.Date > ngaybd.Date)
+				//{
 					voucher.StartDate = ngaybd;
 					voucher.EndDate = ngaykethuc;
-				}
+				//}
 				voucher.Condition = dieukien;
 				voucher.Description = mota;
 				voucher.Status = 1;

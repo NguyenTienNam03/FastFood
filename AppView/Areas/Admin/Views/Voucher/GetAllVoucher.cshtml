@@ -1,0 +1,94 @@
+﻿@model IEnumerable<AppData.Models.Voucher>
+
+@{
+    ViewData["Title"] = "GetAllVoucher";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin-top:100px;">
+    <h1>GetAllVoucher</h1>
+
+    <p>
+        <a href="~/Admin/Voucher/CreateVoucher">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="display:none;">
+                    @Html.DisplayNameFor(model => model.IDVoucher)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VoucherCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quatity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VoucherValue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Condition)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none;">
+                        @Html.DisplayFor(modelItem => item.IDVoucher)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoucherCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quatity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoucherValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Condition)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

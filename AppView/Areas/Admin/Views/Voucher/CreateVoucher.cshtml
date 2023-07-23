@@ -1,0 +1,79 @@
+﻿@model AppData.Models.Voucher
+
+@{
+    ViewData["Title"] = "CreateVoucher";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<h1>CreateVoucher</h1>
+
+<h4>Voucher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="~/Admin/Voucher/CreateVoucher" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="IDVoucher" class="control-label"></label>
+                <input asp-for="IDVoucher" class="form-control" />
+                <span asp-validation-for="IDVoucher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VoucherCode" class="control-label"></label>
+                <input asp-for="VoucherCode" class="form-control" />
+                <span asp-validation-for="VoucherCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quatity" class="control-label"></label>
+                <input asp-for="Quatity" class="form-control" />
+                <span asp-validation-for="Quatity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VoucherValue" class="control-label"></label>
+                <input asp-for="VoucherValue" class="form-control" />
+                <span asp-validation-for="VoucherValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label"></label>
+                <input asp-for="Condition" class="form-control" />
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
