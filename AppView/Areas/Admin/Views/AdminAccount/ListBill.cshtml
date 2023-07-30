@@ -1,0 +1,144 @@
+﻿@model IEnumerable<AppData.Models.Bill>
+
+@{
+    ViewData["Title"] = "ListBill";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin-top:100px;">
+    <table class="table" style="color:white;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDBill)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDVoucher)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDCustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDPayment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InvoiceCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quatity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameReceiver)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneReceiver)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CityReceiver)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DistrictReceiver)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransportFee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPayment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateBill)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfPayment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDBill)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDVoucher)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDPayment)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Billdetail","AdminAccount" , new {id = item.IDBill})">@item.InvoiceCode</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quatity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameReceiver)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneReceiver)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CityReceiver)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DistrictReceiver)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportFee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateBill)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfPayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

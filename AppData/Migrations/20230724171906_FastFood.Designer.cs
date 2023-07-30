@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppData.Migrations
 {
     [DbContext(typeof(DB_Context))]
-    [Migration("20230722162243_FastFood")]
+    [Migration("20230724171906_FastFood")]
     partial class FastFood
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace AppData.Migrations
                     b.Property<string>("CityReceiver")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateBill")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime2");

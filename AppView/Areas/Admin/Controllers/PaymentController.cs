@@ -1,6 +1,10 @@
-﻿using AppData.Models;
+﻿using AppData.IService;
+using AppData.Models;
+using AppData.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using System.Text;
 
 namespace AppView.Areas.Admin.Controllers
@@ -8,10 +12,11 @@ namespace AppView.Areas.Admin.Controllers
     public class PaymentController : Controller
     {
         HttpClient client = new HttpClient();
+        private ICustomerService customerService;
 
         public PaymentController()
         {
-
+            customerService = new CustomerSevice();
         }
 
 
@@ -108,5 +113,7 @@ namespace AppView.Areas.Admin.Controllers
             HttpResponseMessage message = client.PutAsync(url, content).Result;
             return RedirectToAction("GetAllPayment", "Payment");
         }
+
+
     }
 }

@@ -32,6 +32,9 @@ namespace AppData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreateBill")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime2");
 

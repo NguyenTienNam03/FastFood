@@ -28,6 +28,7 @@ namespace AppData.Models
 		public decimal TotalAmount { get ; set; }
 		public decimal TransportFee { get ; set; }
 		public decimal TotalPayment { get ; set; }
+		public DateTime CreateBill { get; set; }
 		public DateTime OrderDate { get ; set; }
 		public DateTime DeliveryDate { get ; set; }
 		public DateTime DateOfPayment { get ; set; }

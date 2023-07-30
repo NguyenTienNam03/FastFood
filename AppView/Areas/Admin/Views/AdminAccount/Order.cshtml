@@ -92,7 +92,7 @@
         <td colspan="4" style="text-align:center;">TOTAL AMOUNT:</td>
         <td>$ @Model.Sum(m => (double) m.Price * m.Quatity)</td>
         <th style="text-align:center;">
-            <a class="btn btn-success">Thanh toan</a>
+            <a href ="@Url.Action("Pay","AdminAccount")" onclick="return confirm('Bạn có chắc muốn thanh toán sản phẩm này?');" class="btn btn-success">Thanh toan</a>
         </th>
         </tbody>
 

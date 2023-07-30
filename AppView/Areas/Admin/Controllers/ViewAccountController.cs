@@ -14,9 +14,23 @@ namespace AppView.Areas.Admin.Controllers
 
         HttpClient client = new HttpClient();
         private ICustomerService customerService;
+        private IVoucherService voucherService;
+        private IPaymentService paymentService;
+        private IBillService billService;
         public ViewAccountController()
         {
             customerService = new CustomerSevice();
+            paymentService = new PaymentService();
+            voucherService = new VoucherService();
+            billService = new BillService();
+        }
+
+        public Guid IDcustomer()
+        {
+            var user = HttpContext.User;
+            var email = user.FindFirstValue(ClaimTypes.Email);
+            var iduser = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
+            return iduser;
         }
         public async Task<IActionResult> Index()
         {
@@ -80,13 +94,5 @@ namespace AppView.Areas.Admin.Controllers
             return RedirectToAction("Order", "AdminAccount");
 
         }
-
-        [HttpGet]
-        [HttpPost]
-        public async Task<IActionResult> pay(Bill bill)
-        {
-            return View();
-        }
-
     }
 }

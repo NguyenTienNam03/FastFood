@@ -38,9 +38,9 @@ namespace AppAPI.Controllers
 
         // GET: api/<BillController>
         [HttpGet("[action]")]
-        public IEnumerable<Bill> GetAllBill()
+        public IEnumerable<Bill> GetAllBill(Guid id)
         {
-            return _billService.GetBillList();
+            return _billService.GetBillList().OrderByDescending(c => c.CreateBill).Where(c => c.IDCustomer == id).ToList();
         }
 
         // GET api/<BillController>/5
@@ -49,7 +49,18 @@ namespace AppAPI.Controllers
         {
             return _billService.GetByID(id);
         }
-
+        [HttpGet("[action]")]
+        public List<BillDetail> Getthelatestvalue(Guid idcustomer)
+        {
+           var idbill =  _billService.GetBillList().OrderByDescending(c => c.CreateBill).First(c =>  c.IDCustomer == idcustomer).IDBill;
+            return _billDetailService.GetBillDetailList(idbill);
+        }
+        [HttpGet("[action]")]
+        public List<BillDetail> GetBillDetailByIdbill(Guid id)
+        {
+            var idbill = _billService.GetBillList().FirstOrDefault(c => c.IDBill == id).IDBill;
+            return _billDetailService.GetBillDetailList(idbill);
+        }
         // POST api/<BillController>
         [HttpPost("[action]")]
         public bool CreateBill(Guid idvoucher, Guid idcustom, Guid idpay,  string? note)
@@ -62,15 +73,16 @@ namespace AppAPI.Controllers
                 bill.IDVoucher = _voucherService.GetAllVouchers().First(c => c.IDVoucher == idvoucher).IDVoucher;
                 bill.IDCustomer = _customerService.GetAllCus().FirstOrDefault(c => c.IDCustomer == idcustom).IDCustomer;
                 bill.IDPayment = _paymentService.GetAllPayments().FirstOrDefault(c => c.IDPayment == idpay).IDPayment;
-                bill.InvoiceCode = Convert.ToString(bill.IDBill).Substring(0, 8);
+                bill.InvoiceCode = Convert.ToString(bill.IDBill).Substring(0, 8).ToUpper();
                 bill.Quatity = 0;
                 bill.NameReceiver = user.NameCustomer;
                 bill.PhoneReceiver = user.PhoneNumber;
                 bill.CityReceiver = user.City;
                 bill.DistrictReceiver = user.District;
                 bill.TotalAmount = 0;
-                bill.TransportFee = 30000;
+                bill.TransportFee = 1;
                 bill.TotalPayment = 0;
+                bill.CreateBill = DateTime.Now;
                 bill.OrderDate = DateTime.Now;
                 bill.DeliveryDate = DateTime.Now;
                 bill.DateOfPayment = DateTime.Now;
@@ -85,7 +97,7 @@ namespace AppAPI.Controllers
                     {
                         IDBill = bill.IDBill,
                         IDBillDetail = Guid.NewGuid(),
-
+                        Price = cartdetail.Price,
                         Quatity = cartdetail.Quatity,
                         IDFood = cartdetail.IDFood,
                         Image = cartdetail.Image,
@@ -94,7 +106,7 @@ namespace AppAPI.Controllers
                     _billDetailService.CreateBillDetail(billDetail);
                     _cartDetailService.DeleteCartDetail(cartdetail.IDCartDetail);
                 }
-                var billdetail = _billDetailService.GetBillDetailList(idcustom);
+                var billdetail = _billDetailService.GetBillDetailList(bill.IDBill);
                 Bill Updatebill = _billService.GetBillList().FirstOrDefault(C => C.IDBill == bill.IDBill);
                 Updatebill.IDVoucher = bill.IDVoucher;
                 Updatebill.IDCustomer = bill.IDCustomer;
@@ -108,9 +120,10 @@ namespace AppAPI.Controllers
                 Updatebill.TotalAmount = billdetail.Sum(c => c.Quatity * c.Price);
                 Updatebill.TransportFee = bill.TransportFee;
                 Updatebill.TotalPayment = billdetail.Sum(c => c.Quatity * c.Price) + bill.TransportFee;
-                Updatebill.OrderDate = DateTime.Now;
-                Updatebill.DeliveryDate = DateTime.Now;
-                Updatebill.DateOfPayment = DateTime.Now;
+                Updatebill.CreateBill = bill.CreateBill;
+                Updatebill.OrderDate = bill.OrderDate;
+                Updatebill.DeliveryDate = bill.DeliveryDate;
+                Updatebill.DateOfPayment = bill.DateOfPayment;
                 Updatebill.Note = note;
                 Updatebill.Status = 1;
                 _billService.UpdateBill(Updatebill);
@@ -122,7 +135,7 @@ namespace AppAPI.Controllers
             }
         }
 
-        [HttpGet("[action]")]
+        [HttpPut("[action]")]
         public bool UpdateBill(Guid idbill, Guid idvoucher, Guid idpay, string name , string phone , string city , string distric, string? note)
         {
             var voucher = _voucherService.GetAllVouchers().First(c => c.IDVoucher == idvoucher);
@@ -130,7 +143,7 @@ namespace AppAPI.Controllers
             Updatebill.IDVoucher = Updatebill.IDVoucher;
             Updatebill.IDVoucher = voucher.IDVoucher;
             Updatebill.IDCustomer = Updatebill.IDCustomer;
-            Updatebill.IDPayment = _paymentService.GetAllPayments().FirstOrDefault(c => c.IDPayment == idpay).IDPayment;
+            Updatebill.IDPayment = _paymentService.GetAllPayments().First(c => c.IDPayment == idpay).IDPayment;
             Updatebill.InvoiceCode = Updatebill.InvoiceCode;
             Updatebill.Quatity = Updatebill.Quatity;
             Updatebill.NameReceiver = name;

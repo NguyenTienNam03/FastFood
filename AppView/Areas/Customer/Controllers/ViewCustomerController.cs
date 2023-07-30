@@ -13,9 +13,11 @@ namespace AppView.Areas.Customer.Controllers
     {
         HttpClient client = new HttpClient();
         private ICustomerService customerService;
+        private IPaymentService paymentService;
         public ViewCustomerController()
         {
             customerService = new CustomerSevice();
+            paymentService = new PaymentService();
         }
         public async Task<IActionResult> Index()
         {
@@ -80,13 +82,6 @@ namespace AppView.Areas.Customer.Controllers
             //}
             //return RedirectToAction("Oder", "CustomerAccountController");
         }
-        [HttpGet]
-        [HttpPost]
-
-        public async Task<IActionResult> Pay()
-        {
-            
-            return View();
-        }
+       
     }
 }

@@ -189,6 +189,7 @@ namespace AppData.Migrations
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TransportFee = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalPayment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreateBill = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateOfPayment = table.Column<DateTime>(type: "datetime2", nullable: false),

@@ -85,14 +85,14 @@
                         <p>@Total.ToString("#.#0").Replace(',', '.')</p>
                     </th>
                     <th style="text-align:center;">
-                        <a href="@Url.Action("RemoveItem","AdminAccount",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
+                        <a href="@Url.Action("RemoveItem","CustomerAccount",new { IDCartDetail = item.IDCartDetail})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a>
                     </th>
                 </tr>
             }
         <td colspan="4" style="text-align:center;">TOTAL AMOUNT:</td>
         <td>$ @Model.Sum(m => (double) m.Price * m.Quatity)</td>
         <th style="text-align:center;">
-            <a class="btn btn-success">Thanh toan</a>
+            <a href="@Url.Action("Pay","CustomerAccount")" onclick="return confirm('Bạn có chắc muốn thanh toán sản phẩm này?');" class="btn btn-success">Thanh toan</a>
         </th>
         </tbody>
 

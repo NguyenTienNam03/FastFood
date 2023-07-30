@@ -16,6 +16,7 @@ namespace AppView.Areas.Customer.Controllers
         private IComboFastFoodService comboFastFoodservice;
         private ISideDishesService sideDishesService;
         private IMainDishesService mainDishesService;
+        private IPaymentService paymentService;
         HttpClient client;
         public CustomerAccountController()
         {
@@ -25,6 +26,7 @@ namespace AppView.Areas.Customer.Controllers
             comboFastFoodservice = new ComboFastFoodService();
             sideDishesService = new SideDishesService();
             mainDishesService = new MainDishesService();
+            paymentService = new PaymentService();
             client = new HttpClient();
         }
         [HttpGet]
@@ -73,6 +75,37 @@ namespace AppView.Areas.Customer.Controllers
                 return RedirectToAction("Order", "CustomerAccount");
             }
         }
+        [HttpGet]
+        [HttpPost]
 
+        public async Task<IActionResult> Pay(Bill bill)
+        {
+            //Tao Bill
+            var user = HttpContext.User;
+            var email = user.FindFirstValue(ClaimTypes.Email);
+            var iduser = customerService.GetAllCus().FirstOrDefault(c => c.Email == email).IDCustomer;
+            var idpayment = paymentService.GetAllPayments().FirstOrDefault(c => c.Payment == "Thanh toan bang tien mat").IDPayment;
+            string url = $"https://localhost:7031/api/Bill/CreateBill?idvoucher=5629e2e6-9fdf-4598-ab7d-2455079ea9b4&idcustom={iduser}&idpay={idpayment}";
+            var obj = JsonConvert.SerializeObject(bill);
+            StringContent content = new StringContent(obj , Encoding.UTF8 , "application/json");
+            HttpResponseMessage message = await client.PostAsync(url, content);
+            if(message.IsSuccessStatusCode)
+            {
+                return RedirectToAction();
+            }
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> BillDetail(Guid id)
+        {
+            string url = $"";
+            return View();
+        }
+        [HttpGet]
+        [HttpPut]
+        public async Task<IActionResult> UpdateBill()
+        {
+            return View();
+        }
     }
 }
