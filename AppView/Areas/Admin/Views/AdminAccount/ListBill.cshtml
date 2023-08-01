@@ -10,20 +10,21 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.InvoiceCode)
+                </th>
+                <th style="display:none;">
                     @Html.DisplayNameFor(model => model.IDBill)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IDVoucher)
                 </th>
-                <th>
+                <th style="display:none;">
                     @Html.DisplayNameFor(model => model.IDCustomer)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.IDPayment)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.InvoiceCode)
-                </th>
+               
                 <th>
                     @Html.DisplayNameFor(model => model.Quatity)
                 </th>
@@ -74,19 +75,19 @@
             {
                 <tr>
                     <td>
+                        <a href="@Url.Action("Billdetail","AdminAccount" , new {id = item.IDBill})">@item.InvoiceCode</a>
+                    </td>
+                    <td style="display:none;">
                         @Html.DisplayFor(modelItem => item.IDBill)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IDVoucher)
                     </td>
-                    <td>
+                    <td style="display:none;">
                         @Html.DisplayFor(modelItem => item.IDCustomer)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IDPayment)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Billdetail","AdminAccount" , new {id = item.IDBill})">@item.InvoiceCode</a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Quatity)
@@ -115,7 +116,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateBill)
                     </td>
-                    <td>
+                    <td >
                         @Html.DisplayFor(modelItem => item.OrderDate)
                     </td>
                     <td>
@@ -131,9 +132,21 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @if(item.Status == 1)
+                        {
+                            <p>Đang giao hàng</p>
+                        }
+                        @if(item.Status == 0)
+                        {
+                            <p>Huỷ hàng</p>
+                        }
+                        @if(item.Status == 2)
+                        {
+                            <p>Đã nhận hàng</p>
+                        }
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             }

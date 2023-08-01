@@ -50,10 +50,10 @@ namespace AppAPI.Controllers
             return _billService.GetByID(id);
         }
         [HttpGet("[action]")]
-        public List<BillDetail> Getthelatestvalue(Guid idcustomer)
+        public Bill Getthelatestvalue(Guid idcustomer)
         {
-           var idbill =  _billService.GetBillList().OrderByDescending(c => c.CreateBill).First(c =>  c.IDCustomer == idcustomer).IDBill;
-            return _billDetailService.GetBillDetailList(idbill);
+           return  _billService.GetBillList().OrderByDescending(c => c.CreateBill).First(c =>  c.IDCustomer == idcustomer);
+            
         }
         [HttpGet("[action]")]
         public List<BillDetail> GetBillDetailByIdbill(Guid id)

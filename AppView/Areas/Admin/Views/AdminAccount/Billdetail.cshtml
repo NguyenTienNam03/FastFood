@@ -5,68 +5,63 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
 }
 
-<h1>Billdetail</h1>
+<div style="margin-top:100px; color:white;">
+    <h1>Billdetail</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.IDBillDetail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDBill)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IDFood)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.NameFood)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quatity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.IDBillDetail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDBill)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDFood)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameFood)
+                    </td>
+                    <td>
+                        <img src="~/img/Combo/@item.Image"  style="height:150px ; width:150px;"/>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quatity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IDBillDetail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDBill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDFood)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NameFood)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quatity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDBillDetail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDBill)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDFood)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameFood)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quatity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

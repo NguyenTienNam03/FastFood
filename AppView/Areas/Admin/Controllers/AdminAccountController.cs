@@ -121,15 +121,13 @@ namespace AppView.Areas.Admin.Controllers
             var result = JsonConvert.DeserializeObject<List<BillDetail>>(data);
             return View(result);
         }
-
-        [HttpGet]
         private Guid GetTheIdOfTheLatestBill()
         {
             var idcustomer = IDCustomer();
             string url = $"https://localhost:7031/api/Bill/Getthelatestvalue?idcustomer={idcustomer}";
             var repos = client.GetAsync(url).Result;
             var data =  repos.Content.ReadAsStringAsync().Result;
-            var result = JsonConvert.DeserializeObject<Bill>(data);
+            Bill result = JsonConvert.DeserializeObject<Bill>(data);
             return result.IDBill;
         }
         [HttpGet]
@@ -154,8 +152,6 @@ namespace AppView.Areas.Admin.Controllers
                 var bill1 = JsonConvert.DeserializeObject<Bill>(data);
                 return View(bill1);
             }
-
-
         }
     }
 }
