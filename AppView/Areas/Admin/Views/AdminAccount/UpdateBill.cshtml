@@ -3,127 +3,240 @@
 @{
     ViewData["Title"] = "UpdateBill";
     Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+    var voucher = ViewBag.listvoucher;
+    var giatri = ViewBag.ValueVoucher;
 }
 
 <div style="margin-top:100px;">
     <h4>Bill</h4>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="UpdateBill">
+    <div class="">
+        <div class="">
+            <form asp-action="UpdateBill" style="line-height: 35px;">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group" style="display:none;">
                     <label for="IDBill">IDBill</label>
                     @Html.TextBoxFor(m => m.IDBill, new { @class = "form-control" })
                     @Html.ValidationMessageFor(Model => Model.IDBill, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <label asp-for="IDVoucher" class="control-label"></label>
-                    <p>@Model.IDVoucher</p>
-                    <span asp-validation-for="IDVoucher" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="InvoiceCode" class="control-label col-3">InvoiceCode</label>
+                    <p class="col-9">@Model.InvoiceCode</p>
+
                 </div>
-              @*  <div class="form-group">
-                    <label asp-for="IDCustomer" class="control-label"></label>
-                   
-                    <span asp-validation-for="IDCustomer" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="CreateBill" class="control-label col-3">CreateBill</label>
+
+                    <p class="col-9">@Model.CreateBill</p>
+
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Quatity" class="control-label col-3">Quatity</label>
+                    <p class="col-9">@Model.Quatity</p>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="NameReceiver" class="control-label col-3">NameReceiver</label>
+                    <div class="col-9">
+                        @Html.TextBoxFor(m => m.NameReceiver, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.NameReceiver, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="PhoneReceiver" class="control-label col-3">PhoneReceiver</label>
+                    <div class="col-9">
+                        @Html.TextBoxFor(m => m.PhoneReceiver, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.PhoneReceiver, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="CityReceiver" class="control-label col-3">CityReceiver</label>
+                    <div class="col-9">
+                        @Html.TextBoxFor(m => m.CityReceiver, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.CityReceiver, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="DistrictReceiver" class="control-label col-3">DistrictReceiver</label>
+                    <div class="col-9">
+                        @Html.TextBoxFor(m => m.DistrictReceiver, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.DistrictReceiver, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="TotalAmount" class="control-label col-3">TotalAmount</label>
+                    <p class="col-9">$ @Model.TotalAmount</p>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="TransportFee" class="control-label col-3">TransportFee</label>
+                    <p class="col-9">$ @Model.TransportFee</p>
+
+                </div>
+                <div class="form-group row">
+                    <label asp-for="TotalPayment" class="control-label col-3">TotalPayment</label>
+                    <p class="col-9">$ @Model.TotalPayment</p>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="IDVoucher" class="control-label col-3">Voucher</label>
+                    <div class="col-9">
+                        @if (giatri == 0)
+                        {
+                            <p>Khong su dung voucher</p>
+                        }
+                        else
+                        {
+                            <p> Ban su dung Voucher giam gia @giatri %</p>
+                        }
+
+                        <!-- Modal (Form nổi) -->
+                        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="width:1000px; background-color: white;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="myModalLabel">Form Nổi</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">
+                                                        <span>IDVoucher</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>MaVoucher</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>Dieukien</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>NgayBatDau</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>NgayKetThuc</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>GiaTriVoucher</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>Soluong</span>
+                                                    </th>
+                                                    <th>
+
+                                                        <span>TrangThai</span>
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in voucher)
+                                                {
+                                                    <tr>
+                                                        <td style="display:none;">
+                                                            item.IDVoucher
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayName(item.VoucherCode)
+                                                        </td>
+                                                        <td>
+                                                            Tổng thanh toán lớn @item.Condition)
+                                                        </td>
+                                                        <td>
+                                                            @item.StartDate
+                                                        </td>
+                                                        <td>
+                                                            @item.EndDate
+                                                        </td>
+                                                        <td>
+                                                            Giảm @item.VoucherValue %
+                                                        </td>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            @item.Status
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("ApDungVoucher", "Account", new { IdBill = Model.IDBill, IDVoucher = item.IDVoucher})">Áp Dụng Voucher</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Lưu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*End - Form noi*@
+                </div>
+
+                @*                <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <p>@Model.CreateBill</p>
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
                 </div>*@
-                <div class="form-group">
-                    <label asp-for="IDPayment" class="control-label">Payment</label>
-                    <p>@Model.IDPayment</p>
-                    <span asp-validation-for="IDPayment" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="DeliveryDate" class="control-label col-3">DeliveryDate</label>
+                    <p class="col-9">@Model.DeliveryDate</p>
+                    
                 </div>
-                <div class="form-group">
-                    <label asp-for="InvoiceCode" class="control-label">InvoiceCode</label>
-                    <p>@Model.InvoiceCode</p>
-                    <span asp-validation-for="InvoiceCode" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Quatity" class="control-label">Quatity</label>
-                    <p>@Model.Quatity</p>
-                    <span asp-validation-for="Quatity" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NameReceiver" class="control-label">NameReceiver</label>
-                    @Html.TextBoxFor(m => m.NameReceiver, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.NameReceiver, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label asp-for="PhoneReceiver" class="control-label">PhoneReceiver</label>
-                    @Html.TextBoxFor(m => m.PhoneReceiver, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.PhoneReceiver, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label asp-for="CityReceiver" class="control-label">CityReceiver</label>
-                    @Html.TextBoxFor(m => m.CityReceiver, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.CityReceiver, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label asp-for="DistrictReceiver" class="control-label">DistrictReceiver</label>
-                    @Html.TextBoxFor(m => m.DistrictReceiver, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(Model => Model.DistrictReceiver, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label asp-for="TotalAmount" class="control-label">TotalAmount</label>
-                    <p>@Model.TotalAmount</p>
-                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TransportFee" class="control-label">TransportFee</label>
-                    <p>@Model.TransportFee</p>
-                    <span asp-validation-for="TransportFee" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TotalPayment" class="control-label">TotalPayment</label>
-                    <p>@Model.TotalPayment</p>
-                    <span asp-validation-for="TotalPayment" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CreateBill" class="control-label">CreateBill</label>
-                   
-                    <p>@Model.CreateBill</p>
-                  
-                </div>
-@*                <div class="form-group">
-                    <label asp-for="OrderDate" class="control-label"></label>
-                    <input asp-for="OrderDate" class="form-control" />
-                    <p>@Model.CreateBill</p>
-                    <span asp-validation-for="OrderDate" class="text-danger"></span>
-                </div>*@
-                <div class="form-group">
-                    <label asp-for="DeliveryDate" class="control-label">DeliveryDate</label>
-                    <p>@Model.DeliveryDate</p>
-                    <span asp-validation-for="DeliveryDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                     <label asp-for="DateOfPayment" class="control-label">DateOfPayment</label>
                     <p>@Model.DateOfPayment</p>
-                    <span asp-validation-for="DateOfPayment" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Note" class="control-label">Note</label>
-                    @Html.TextAreaFor( m => m.Note ,  new { @class = "form-control" });
-                    <span asp-validation-for="Note" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="Note" class="control-label col-3">Note</label>
+                    <div class="col-9">
+                        @Html.TextAreaFor( m => m.Note ,  new { @class = "form-control" })
+                        <span asp-validation-for="Note" class="text-danger"></span>
+                    </div>
                 </div>
-@*                <div class="form-group">
-                    <label asp-for="Status" class="control-label"></label>
-                    <input asp-for="Status" class="form-control" />
-                    <span asp-validation-for="Status" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="IDPayment" class="control-label col-3">Payment</label>
+                    <p class="col-9">@Model.IDPayment</p>
+                </div>
+                @*                <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
                 </div>*@
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <button type="submit" value="Save" class="btn btn-primary">Xac Nhan</button>
                 </div>
             </form>
         </div>
     </div>
+    @*  <div class="form-group">
+    <label asp-for="IDCustomer" class="control-label"></label>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+    <span asp-validation-for="IDCustomer" class="text-danger"></span>
+    </div>*@
+</div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     }
 </div>
 

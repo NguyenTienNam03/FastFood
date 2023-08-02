@@ -150,8 +150,27 @@ namespace AppView.Areas.Admin.Controllers
                 var respon = await client.GetAsync(url);
                 var data = await respon.Content.ReadAsStringAsync();
                 var bill1 = JsonConvert.DeserializeObject<Bill>(data);
+                ViewBag.listvoucher = ListVoucher();
+                ViewBag.ValueVoucher = GiaTriVoucher();
                 return View(bill1);
             }
+        }
+        private List<Voucher> ListVoucher()
+        {
+            string url = "https://localhost:7031/api/Voucher/GetAllVoucher";
+            var respon = client.GetAsync(url).Result;
+            var data = respon.Content.ReadAsStringAsync().Result;
+            var voucher = JsonConvert.DeserializeObject<List<Voucher>>(data);
+            return voucher;
+        }
+        private decimal GiaTriVoucher()
+        {
+            var idcus = IDCustomer();
+            string url = $"https://localhost:7031/api/Bill/Getthelatestvalue?idcustomer={idcus}";
+            var respon = client.GetAsync(url).Result;
+            var data = respon.Content.ReadAsStringAsync().Result;
+            var voucher = JsonConvert.DeserializeObject<Voucher>(data);
+            return voucher.VoucherValue;
         }
     }
 }
